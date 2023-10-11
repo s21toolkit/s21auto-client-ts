@@ -196,7 +196,7 @@ export class Token {
 		return !isExpired
 	}
 
-	#assertValid() {
+	assertValid() {
 		if (this.isValid) {
 			return
 		}
@@ -205,7 +205,7 @@ export class Token {
 	}
 
 	get accessToken() {
-		this.#assertValid()
+		this.assertValid()
 
 		return this.#data!.accessToken
 	}

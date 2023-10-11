@@ -1,4 +1,5 @@
 import { source } from "common-tags"
+import { S21_GQL_API_URL } from "@/constants"
 import { createGqlQueryRequest, extractGqlResponseData } from "@/gql"
 import { Token } from "./Token"
 
@@ -42,8 +43,6 @@ type UserSchoolPermission = {
 type UserRole = {
 	schoolId: string
 }
-
-const S21_GQL_API_URL = "https://edu.21-school.ru/services/graphql"
 
 const userRoleLoaderGetRolesRequest = JSON.stringify(
 	createGqlQueryRequest(source`
