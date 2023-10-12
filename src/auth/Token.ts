@@ -143,7 +143,7 @@ export class Token {
 			return
 		}
 
-		this.refresh()
+		await this.refresh()
 	}
 
 	async refresh() {
