@@ -1,4 +1,4 @@
-import { ApiContext } from "@/api/ApiContext"
+import { ApiContext } from "@/api"
 import { AuthProvider, getAuthHeaders } from "@/auth/providers/AuthProvider"
 import { S21_GQL_API_URL } from "@/constants"
 import { extractGqlResponseData, GQLRequest } from "@/gql"
