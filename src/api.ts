@@ -1,5 +1,5 @@
 import { Client } from "@/Client"
-import { createGqlQueryRequest } from "./gql/index"
+import { createGqlQueryRequest } from "@/gql"
 
 type ElideVariables<TVariables> = {} extends TVariables
 	? [variables?: TVariables]
