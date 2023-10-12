@@ -1,6 +1,5 @@
-import { Token } from "@/auth/Token"
-import { AuthCredentials, AuthProvider } from "@/AuthProvider"
-import { fetchUserData } from "./auth/user"
+import { fetchUserData, Token } from "@/auth/core"
+import { AuthCredentials, AuthProvider } from "@/auth/providers/AuthProvider"
 
 export class DefaultAuthProvider implements AuthProvider {
 	#token: Token

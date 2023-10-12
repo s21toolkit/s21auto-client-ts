@@ -1,7 +1,7 @@
+import { ApiContext } from "@/api/ApiContext"
+import { AuthProvider, getAuthHeaders } from "@/auth/providers/AuthProvider"
 import { S21_GQL_API_URL } from "@/constants"
-import { ApiContext } from "./api/ApiContext"
-import { AuthProvider } from "./AuthProvider"
-import { extractGqlResponseData, GQLRequest } from "./gql"
+import { extractGqlResponseData, GQLRequest } from "@/gql"
 
 export class Client {
 	#authProvider: AuthProvider
@@ -24,8 +24,7 @@ export class Client {
 		const response = await fetch(S21_GQL_API_URL, {
 			method: "POST",
 			headers: {
-				Authorization: `Bearer ${credentials.accessToken}`,
-				schoolid: credentials.schoolId,
+				...getAuthHeaders(credentials),
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(gqlRequest),

@@ -3,7 +3,7 @@ import { S21_GQL_API_URL } from "@/constants"
 import { createGqlQueryRequest, extractGqlResponseData } from "@/gql"
 import { Token } from "./Token"
 
-type UserDataRole = {
+export type UserRoleData = {
 	user: User
 }
 
@@ -112,7 +112,7 @@ export async function fetchUserData(token: Token) {
 		)
 	}
 
-	const data = await extractGqlResponseData<UserDataRole>(userDataResponse)
+	const data = await extractGqlResponseData<UserRoleData>(userDataResponse)
 
 	return data
 }
