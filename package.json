@@ -1,5 +1,5 @@
 {
-	"name": "s21client-ts",
+	"name": "@s21toolkit/client",
 	"type": "module",
 	"module": "build/index.js",
 	"types": "build/index.d.ts",
