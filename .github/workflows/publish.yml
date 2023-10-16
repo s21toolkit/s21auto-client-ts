@@ -1,0 +1,24 @@
+on:
+  push:
+    tags: "v*.*.*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 19
+          cache: bun
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Build & Publish
+        run: |
+          bun i
+          bun run prepublishOnly
+          npm publish --access public

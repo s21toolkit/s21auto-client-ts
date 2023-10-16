@@ -21,6 +21,13 @@
 		"prettier": "^3.0.0",
 		"typescript": "^5.2.2"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/s21toolkit/s21client-ts.git"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/"
+	},
 	"peerDependencies": {
 		"typescript": "^5.2.2"
 	}
