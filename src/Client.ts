@@ -30,6 +30,12 @@ export class Client {
 			body: JSON.stringify(gqlRequest),
 		})
 
+		if (!response.ok) {
+			throw new Error(`Response failed: ${response.statusText}`, {
+				cause: response,
+			})
+		}
+
 		return extractGqlResponseData<TData>(response)
 	}
 }
