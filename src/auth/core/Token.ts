@@ -143,7 +143,7 @@ export class Token {
 			return
 		}
 
-		this.refresh()
+		await this.refresh()
 	}
 
 	async refresh() {
@@ -196,7 +196,7 @@ export class Token {
 		return !isExpired
 	}
 
-	#assertValid() {
+	assertValid() {
 		if (this.isValid) {
 			return
 		}
@@ -205,7 +205,7 @@ export class Token {
 	}
 
 	get accessToken() {
-		this.#assertValid()
+		this.assertValid()
 
 		return this.#data!.accessToken
 	}
