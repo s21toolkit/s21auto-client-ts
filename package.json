@@ -1,20 +1,21 @@
 {
-  "name": "s21client-ts",
-  "type": "module",
-  "module": "src/index.ts",
-  "dependencies": {
-    "common-tags": "^1.8.2"
-  },
-  "devDependencies": {
-    "@types/common-tags": "^1.8.2",
-    "bun-types": "latest",
-    "eslint": "^8.41.0",
-    "eslint-kit": "^10.0.0",
-    "eslint-plugin-no-relative-import-paths": "^1.5.2",
-    "prettier": "^3.0.0",
-    "typescript": "^5.2.2"
-  },
-  "peerDependencies": {
-    "typescript": "^5.2.2"
-  }
+	"name": "s21client-ts",
+	"type": "module",
+	"module": "src/index.ts",
+	"version": "0.1",
+	"dependencies": {
+		"common-tags": "^1.8.2"
+	},
+	"devDependencies": {
+		"@types/common-tags": "^1.8.2",
+		"bun-types": "latest",
+		"eslint": "^8.41.0",
+		"eslint-kit": "^10.0.0",
+		"eslint-plugin-no-relative-import-paths": "^1.5.2",
+		"prettier": "^3.0.0",
+		"typescript": "^5.2.2"
+	},
+	"peerDependencies": {
+		"typescript": "^5.2.2"
+	}
 }
