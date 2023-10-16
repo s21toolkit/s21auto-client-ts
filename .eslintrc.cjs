@@ -34,6 +34,7 @@ module.exports = configure({
 				},
 			],
 			"@typescript-eslint/no-namespace": ["off"],
+			"no-undef": ["off"],
 		},
 	},
 })
