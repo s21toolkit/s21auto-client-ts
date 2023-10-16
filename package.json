@@ -8,6 +8,10 @@
 		"build": "bun run build.mjs",
 		"prepublishOnly": "bun run build"
 	},
+	"files": [
+		"build/*",
+		"README.md"
+	],
 	"dependencies": {
 		"common-tags": "^1.8.2"
 	},
