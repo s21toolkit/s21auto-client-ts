@@ -8,6 +8,10 @@
 		"build": "bun run build.mjs",
 		"prepublishOnly": "bun run build"
 	},
+	"files": [
+		"build/*",
+		"README.md"
+	],
 	"dependencies": {
 		"common-tags": "^1.8.2"
 	},
@@ -20,6 +24,13 @@
 		"eslint-plugin-no-relative-import-paths": "^1.5.2",
 		"prettier": "^3.0.0",
 		"typescript": "^5.2.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/s21toolkit/s21client-ts.git"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/"
 	},
 	"peerDependencies": {
 		"typescript": "^5.2.2"
