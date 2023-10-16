@@ -13,7 +13,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 19
-          cache: bun
+          cache: npm
+          cache-dependency-path: bun.lockb
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
