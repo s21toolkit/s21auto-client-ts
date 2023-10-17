@@ -23,5 +23,5 @@ jobs:
           bun-version: latest
       - name: Build & Publish
         run: |
-          bun i
+          bun install --frozen-lockfile
           npm publish
