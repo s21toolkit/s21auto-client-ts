@@ -12,7 +12,7 @@ function useDefaultVariables<T>(variables: T | undefined): Partial<T> {
 export namespace Api {
 	export namespace GetUserRestrictionsInfo {
 		export const request = createGqlQueryRequest(
-			"query getUserRestrictionsInfo { school21 { getUserRestrictions { restrictionId restrictionType userId schoolId isActive createdTs updatedTs __typename } __typename } } ",
+			"query getUserRestrictionsInfo {\n  school21 {\n    getUserRestrictions {\n      restrictionId\n      restrictionType\n      userId\n      schoolId\n      isActive\n      createdTs\n      updatedTs\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -37,7 +37,7 @@ export namespace Api {
 
 	export namespace UserRoleLoaderGetRoles {
 		export const request = createGqlQueryRequest(
-			"query userRoleLoaderGetRoles { user { getCurrentUser { functionalRoles { code __typename } id studentRoles { id school { id shortName organizationType __typename } status __typename } userSchoolPermissions { schoolId permissions __typename } systemAdminRole { id __typename } businessAdminRolesV2 { id school { id organizationType __typename } orgUnitId __typename } __typename } getCurrentUserSchoolRoles { schoolId __typename } __typename } } ",
+			"query userRoleLoaderGetRoles {\n  user {\n    getCurrentUser {\n      functionalRoles {\n        code\n        __typename\n      }\n      id\n      studentRoles {\n        id\n        school {\n          id\n          shortName\n          organizationType\n          __typename\n        }\n        status\n        __typename\n      }\n      userSchoolPermissions {\n        schoolId\n        permissions\n        __typename\n      }\n      systemAdminRole {\n        id\n        __typename\n      }\n      businessAdminRolesV2 {\n        id\n        school {\n          id\n          organizationType\n          __typename\n        }\n        orgUnitId\n        __typename\n      }\n      __typename\n    }\n    getCurrentUserSchoolRoles {\n      schoolId\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -103,7 +103,7 @@ export namespace Api {
 
 	export namespace GetUserFeatureFlags {
 		export const request = createGqlQueryRequest(
-			"query getUserFeatureFlags($entityId: String!) { user { getAllBackendConfigurations: getAllBackendConfigurationsV2(entityId: $entityId) { propertyCode value __typename } __typename } } ",
+			"query getUserFeatureFlags($entityId: String!) {\n  user {\n    getAllBackendConfigurations: getAllBackendConfigurationsV2(entityId: $entityId) {\n      propertyCode\n      value\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -137,7 +137,7 @@ export namespace Api {
 
 	export namespace GetStudentIsDeadlinesEnabled {
 		export const request = createGqlQueryRequest(
-			"query getStudentIsDeadlinesEnabled { student { isDeadlinesEnabled __typename } } ",
+			"query getStudentIsDeadlinesEnabled {\n  student {\n    isDeadlinesEnabled\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -162,7 +162,7 @@ export namespace Api {
 
 	export namespace GetTournamentNotificationResults {
 		export const request = createGqlQueryRequest(
-			"query getTournamentNotificationResults { student { getTournamentResults(isShown: false) { id power coalitionRank userRank firstCoalitionName coalitionName timeClosed __typename } __typename } } ",
+			"query getTournamentNotificationResults {\n  student {\n    getTournamentResults(isShown: false) {\n      id\n      power\n      coalitionRank\n      userRank\n      firstCoalitionName\n      coalitionName\n      timeClosed\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -187,7 +187,7 @@ export namespace Api {
 
 	export namespace DeadlinesGetStudentData {
 		export const request = createGqlQueryRequest(
-			"query deadlinesGetStudentData { student { getStudentProfile { user { id login firstName middleName lastName __typename } __typename } getExperience { id value level { id range { id levelCode rightBorder leftBorder __typename } __typename } __typename } getExperienceHistory { id awardDate experienceReceived __typename } __typename } } ",
+			"query deadlinesGetStudentData {\n  student {\n    getStudentProfile {\n      user {\n        id\n        login\n        firstName\n        middleName\n        lastName\n        __typename\n      }\n      __typename\n    }\n    getExperience {\n      id\n      value\n      level {\n        id\n        range {\n          id\n          levelCode\n          rightBorder\n          leftBorder\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    getExperienceHistory {\n      id\n      awardDate\n      experienceReceived\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -256,7 +256,7 @@ export namespace Api {
 
 	export namespace DeadlineReminderGetClosestDeadlinePopup {
 		export const request = createGqlQueryRequest(
-			"query deadlineReminderGetClosestDeadlinePopup { student { getClosestDeadlinePopup { deadline { ...DeadlineData __typename } deadlineGoal { ...DeadlineGoalData __typename } shiftCount __typename } __typename } } fragment DeadlineData on Deadline { deadlineId description comment deadlineToDaysArray deadlineTs createTs updateTs status rules { logicalOperatorId rulesInGroup { logicalOperatorId value { fieldId subFieldKey operator value __typename } __typename } __typename } __typename } fragment DeadlineGoalData on DeadlineGoal { goalProjects { studentGoalId project { goalName goalId __typename } status executionType finalPercentage finalPoint pointTask __typename } goalCourses { ...GoalCourse __typename } levels { ...Level __typename } __typename } fragment GoalCourse on CourseCoverInformation { localCourseId courseName courseType experienceFact finalPercentage displayedCourseStatus __typename } fragment Level on ExperienceLevelRange { id level levelCode leftBorder rightBorder __typename } ",
+			"query deadlineReminderGetClosestDeadlinePopup {\n  student {\n    getClosestDeadlinePopup {\n      deadline {\n        ...DeadlineData\n        __typename\n      }\n      deadlineGoal {\n        ...DeadlineGoalData\n        __typename\n      }\n      shiftCount\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment DeadlineData on Deadline {\n  deadlineId\n  description\n  comment\n  deadlineToDaysArray\n  deadlineTs\n  createTs\n  updateTs\n  status\n  rules {\n    logicalOperatorId\n    rulesInGroup {\n      logicalOperatorId\n      value {\n        fieldId\n        subFieldKey\n        operator\n        value\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment DeadlineGoalData on DeadlineGoal {\n  goalProjects {\n    studentGoalId\n    project {\n      goalName\n      goalId\n      __typename\n    }\n    status\n    executionType\n    finalPercentage\n    finalPoint\n    pointTask\n    __typename\n  }\n  goalCourses {\n    ...GoalCourse\n    __typename\n  }\n  levels {\n    ...Level\n    __typename\n  }\n  __typename\n}\n\nfragment GoalCourse on CourseCoverInformation {\n  localCourseId\n  courseName\n  courseType\n  experienceFact\n  finalPercentage\n  displayedCourseStatus\n  __typename\n}\n\nfragment Level on ExperienceLevelRange {\n  id\n  level\n  levelCode\n  leftBorder\n  rightBorder\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -281,7 +281,7 @@ export namespace Api {
 
 	export namespace EventsWithoutFeedback {
 		export const request = createGqlQueryRequest(
-			"query eventsWithoutFeedback($from: DateTime!, $to: DateTime!) { student { getCalendarEventsWithoutFeedback(from: $from, to: $to) { id activity { eventId name endDate __typename } __typename } __typename } } ",
+			"query eventsWithoutFeedback($from: DateTime!, $to: DateTime!) {\n  student {\n    getCalendarEventsWithoutFeedback(from: $from, to: $to) {\n      id\n      activity {\n        eventId\n        name\n        endDate\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -309,7 +309,7 @@ export namespace Api {
 
 	export namespace GetIsHonorRatingNeeded {
 		export const request = createGqlQueryRequest(
-			"query getIsHonorRatingNeeded { student { isHonorRatingNeeded __typename } } ",
+			"query getIsHonorRatingNeeded {\n  student {\n    isHonorRatingNeeded\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -334,7 +334,7 @@ export namespace Api {
 
 	export namespace GetSaleProgressPercentages {
 		export const request = createGqlQueryRequest(
-			"query getSaleProgressPercentages { school21 { getSaleProgressPercentages { ...RpSaleInfo __typename } __typename } } fragment RpSaleInfo on RpSaleProgress { rpType progressPercentage __typename } ",
+			"query getSaleProgressPercentages {\n  school21 {\n    getSaleProgressPercentages {\n      ...RpSaleInfo\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment RpSaleInfo on RpSaleProgress {\n  rpType\n  progressPercentage\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -365,7 +365,7 @@ export namespace Api {
 
 	export namespace GetSearchHistory {
 		export const request = createGqlQueryRequest(
-			"query getSearchHistory { school21 { getSearchHistoryTooltips { tooltipText tooltipCategory __typename } __typename } } ",
+			"query getSearchHistory {\n  school21 {\n    getSearchHistoryTooltips {\n      tooltipText\n      tooltipCategory\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -396,7 +396,7 @@ export namespace Api {
 
 	export namespace GetUserNotificationsCount {
 		export const request = createGqlQueryRequest(
-			"query getUserNotificationsCount($wasReadIncluded: Boolean) { student { getS21NotificationsCount(wasReadIncluded: $wasReadIncluded) __typename } } ",
+			"query getUserNotificationsCount($wasReadIncluded: Boolean) {\n  student {\n    getS21NotificationsCount(wasReadIncluded: $wasReadIncluded)\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -423,7 +423,7 @@ export namespace Api {
 
 	export namespace DashboardHeaderGetInfo {
 		export const request = createGqlQueryRequest(
-			"query dashboardHeaderGetInfo { user { getCurrentUser { id login avatarUrl firstName middleName lastName currentSchoolStudentId studentRoles { id status school { id shortName __typename } __typename } __typename } __typename } student { getUserTournamentWidget { coalitionMember { coalition { avatarUrl color name memberCount __typename } currentTournamentPowerRank { rank __typename } __typename } lastTournamentResult { userRank __typename } __typename } getExperience { id value level { id range { id levelCode rightBorder leftBorder __typename } __typename } cookiesCount coinsCount codeReviewPoints __typename } __typename } } ",
+			"query dashboardHeaderGetInfo {\n  user {\n    getCurrentUser {\n      id\n      login\n      avatarUrl\n      firstName\n      middleName\n      lastName\n      currentSchoolStudentId\n      studentRoles {\n        id\n        status\n        school {\n          id\n          shortName\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  student {\n    getUserTournamentWidget {\n      coalitionMember {\n        coalition {\n          avatarUrl\n          color\n          name\n          memberCount\n          __typename\n        }\n        currentTournamentPowerRank {\n          rank\n          __typename\n        }\n        __typename\n      }\n      lastTournamentResult {\n        userRank\n        __typename\n      }\n      __typename\n    }\n    getExperience {\n      id\n      value\n      level {\n        id\n        range {\n          id\n          levelCode\n          rightBorder\n          leftBorder\n          __typename\n        }\n        __typename\n      }\n      cookiesCount\n      coinsCount\n      codeReviewPoints\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -534,7 +534,7 @@ export namespace Api {
 
 	export namespace DeadlinesGetDeadlines {
 		export const request = createGqlQueryRequest(
-			"query deadlinesGetDeadlines($deadlineStatuses: [DeadlineStatus!]!, $page: PagingInput!, $deadlinesFrom: DateTime, $deadlinesTo: DateTime, $sorting: [SortingField]) { student { getDeadlines( deadlineStatuses: $deadlineStatuses page: $page deadlineFrom: $deadlinesFrom deadlineTo: $deadlinesTo sorting: $sorting ) { deadline { ...DeadlineData __typename } shiftRequests { deadlineShiftRequestId status daysToShift createTs __typename } deadlineGoal { ...DeadlineGoalData __typename } shiftCount __typename } __typename } } fragment DeadlineData on Deadline { deadlineId description comment deadlineToDaysArray deadlineTs createTs updateTs status rules { logicalOperatorId rulesInGroup { logicalOperatorId value { fieldId subFieldKey operator value __typename } __typename } __typename } __typename } fragment DeadlineGoalData on DeadlineGoal { goalProjects { studentGoalId project { goalName goalId __typename } status executionType finalPercentage finalPoint pointTask __typename } goalCourses { ...GoalCourse __typename } levels { ...Level __typename } __typename } fragment GoalCourse on CourseCoverInformation { localCourseId courseName courseType experienceFact finalPercentage displayedCourseStatus __typename } fragment Level on ExperienceLevelRange { id level levelCode leftBorder rightBorder __typename } ",
+			"query deadlinesGetDeadlines($deadlineStatuses: [DeadlineStatus!]!, $page: PagingInput!, $deadlinesFrom: DateTime, $deadlinesTo: DateTime, $sorting: [SortingField]) {\n  student {\n    getDeadlines(\n      deadlineStatuses: $deadlineStatuses\n      page: $page\n      deadlineFrom: $deadlinesFrom\n      deadlineTo: $deadlinesTo\n      sorting: $sorting\n    ) {\n      deadline {\n        ...DeadlineData\n        __typename\n      }\n      shiftRequests {\n        deadlineShiftRequestId\n        status\n        daysToShift\n        createTs\n        __typename\n      }\n      deadlineGoal {\n        ...DeadlineGoalData\n        __typename\n      }\n      shiftCount\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment DeadlineData on Deadline {\n  deadlineId\n  description\n  comment\n  deadlineToDaysArray\n  deadlineTs\n  createTs\n  updateTs\n  status\n  rules {\n    logicalOperatorId\n    rulesInGroup {\n      logicalOperatorId\n      value {\n        fieldId\n        subFieldKey\n        operator\n        value\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment DeadlineGoalData on DeadlineGoal {\n  goalProjects {\n    studentGoalId\n    project {\n      goalName\n      goalId\n      __typename\n    }\n    status\n    executionType\n    finalPercentage\n    finalPoint\n    pointTask\n    __typename\n  }\n  goalCourses {\n    ...GoalCourse\n    __typename\n  }\n  levels {\n    ...Level\n    __typename\n  }\n  __typename\n}\n\nfragment GoalCourse on CourseCoverInformation {\n  localCourseId\n  courseName\n  courseType\n  experienceFact\n  finalPercentage\n  displayedCourseStatus\n  __typename\n}\n\nfragment Level on ExperienceLevelRange {\n  id\n  level\n  levelCode\n  leftBorder\n  rightBorder\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -630,7 +630,7 @@ export namespace Api {
 
 	export namespace GetDashboardBuildings {
 		export const request = createGqlQueryRequest(
-			"query getDashboardBuildings { student { getBuildings { id classrooms { id number __typename } __typename } __typename } } ",
+			"query getDashboardBuildings {\n  student {\n    getBuildings {\n      id\n      classrooms {\n        id\n        number\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -667,7 +667,7 @@ export namespace Api {
 
 	export namespace GetUpcomingEvents {
 		export const request = createGqlQueryRequest(
-			"query getUpcomingEvents($eventCodes: [String!]!, $registrationAccessStatusFilter: RegistartionStatusEnum, $page: PagingInput) { student { getUpcomingEventsForRegistration( eventCodes: $eventCodes registrationAccessStatusFilter: $registrationAccessStatusFilter page: $page ) { ...UpcomingEvent __typename } __typename } } fragment UpcomingEvent on CalendarEvent { id start end bookings { id task { id goalName __typename } __typename } eventSlots { id eventId type start end __typename } maxStudentCount location ipRange eventType eventCode description externalId currentStudentsCount exam { examId eventId beginDate endDate location ip maxStudentCount isVisible name goalId isWaitListActive isInWaitList currentStudentsCount createDate updateDate schoolId stopRegisterDate isRegistered goalName eventType registrationAccessStatus __typename } studentCodeReview { studentGoalId __typename } activity { activityEventId eventId beginDate endDate location description maxStudentCount isVisible name isWaitListActive isInWaitList currentStudentsCount createDate updateDate schoolId stopRegisterDate isRegistered activityType eventType isMandatory status organizers { id login __typename } __typename } penalty { ...Penalty __typename } __typename } fragment Penalty on Penalty { comment id duration status startTime createTime penaltySlot { currentStudentsCount description duration startTime id endTime __typename } reasonId __typename } ",
+			"query getUpcomingEvents($eventCodes: [String!]!, $registrationAccessStatusFilter: RegistartionStatusEnum, $page: PagingInput) {\n  student {\n    getUpcomingEventsForRegistration(\n      eventCodes: $eventCodes\n      registrationAccessStatusFilter: $registrationAccessStatusFilter\n      page: $page\n    ) {\n      ...UpcomingEvent\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment UpcomingEvent on CalendarEvent {\n  id\n  start\n  end\n  bookings {\n    id\n    task {\n      id\n      goalName\n      __typename\n    }\n    __typename\n  }\n  eventSlots {\n    id\n    eventId\n    type\n    start\n    end\n    __typename\n  }\n  maxStudentCount\n  location\n  ipRange\n  eventType\n  eventCode\n  description\n  externalId\n  currentStudentsCount\n  exam {\n    examId\n    eventId\n    beginDate\n    endDate\n    location\n    ip\n    maxStudentCount\n    isVisible\n    name\n    goalId\n    isWaitListActive\n    isInWaitList\n    currentStudentsCount\n    createDate\n    updateDate\n    schoolId\n    stopRegisterDate\n    isRegistered\n    goalName\n    eventType\n    registrationAccessStatus\n    __typename\n  }\n  studentCodeReview {\n    studentGoalId\n    __typename\n  }\n  activity {\n    activityEventId\n    eventId\n    beginDate\n    endDate\n    location\n    description\n    maxStudentCount\n    isVisible\n    name\n    isWaitListActive\n    isInWaitList\n    currentStudentsCount\n    createDate\n    updateDate\n    schoolId\n    stopRegisterDate\n    isRegistered\n    activityType\n    eventType\n    isMandatory\n    status\n    organizers {\n      id\n      login\n      __typename\n    }\n    __typename\n  }\n  penalty {\n    ...Penalty\n    __typename\n  }\n  __typename\n}\n\nfragment Penalty on Penalty {\n  comment\n  id\n  duration\n  status\n  startTime\n  createTime\n  penaltySlot {\n    currentStudentsCount\n    description\n    duration\n    startTime\n    id\n    endTime\n    __typename\n  }\n  reasonId\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -779,7 +779,7 @@ export namespace Api {
 
 	export namespace GetAgendaEvents {
 		export const request = createGqlQueryRequest(
-			"query getAgendaEvents($from: DateTime!, $to: DateTime!, $limit: Int!) { student { getMyAgendaEvents(from: $from, to: $to, limit: $limit) { agendaItemContext { entityId entityType __typename } start end label description agendaEventType additionalInfo { key value __typename } __typename } __typename } } ",
+			"query getAgendaEvents($from: DateTime!, $to: DateTime!, $limit: Int!) {\n  student {\n    getMyAgendaEvents(from: $from, to: $to, limit: $limit) {\n      agendaItemContext {\n        entityId\n        entityType\n        __typename\n      }\n      start\n      end\n      label\n      description\n      agendaEventType\n      additionalInfo {\n        key\n        value\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -831,7 +831,7 @@ export namespace Api {
 
 	export namespace WidgetAchievementsGetLastBadges {
 		export const request = createGqlQueryRequest(
-			"query widgetAchievementsGetLastBadges($limit: Int) { student { getLastBadges(limit: $limit) { id points badge { name avatarUrl __typename } award { awardBounties { awardLevelId __typename } __typename } __typename } __typename } } ",
+			"query widgetAchievementsGetLastBadges($limit: Int) {\n  student {\n    getLastBadges(limit: $limit) {\n      id\n      points\n      badge {\n        name\n        avatarUrl\n        __typename\n      }\n      award {\n        awardBounties {\n          awardLevelId\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -882,7 +882,7 @@ export namespace Api {
 
 	export namespace GetDashboardWorkstation {
 		export const request = createGqlQueryRequest(
-			"query getDashboardWorkstation($login: String!) { student { getWorkstationByLogin(login: $login) { id classroomId hostName classroom { floor __typename } __typename } __typename } } ",
+			"query getDashboardWorkstation($login: String!) {\n  student {\n    getWorkstationByLogin(login: $login) {\n      id\n      classroomId\n      hostName\n      classroom {\n        floor\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -909,7 +909,7 @@ export namespace Api {
 
 	export namespace GetStudentStageGroupS21 {
 		export const request = createGqlQueryRequest(
-			"query getStudentStageGroupS21($studentId: UUID!) { student { getStageGroupS21PublicProfile(studentId: $studentId) { waveId waveName eduForm __typename } __typename } } ",
+			"query getStudentStageGroupS21($studentId: UUID!) {\n  student {\n    getStageGroupS21PublicProfile(studentId: $studentId) {\n      waveId\n      waveName\n      eduForm\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -943,7 +943,7 @@ export namespace Api {
 
 	export namespace GetAsapWidgets {
 		export const request = createGqlQueryRequest(
-			"query getAsapWidgets { student { getAsapWidgetList { widgetList { ...AsapWidget __typename } __typename } __typename } } fragment AsapWidget on AsapWidgetInfo { shortImg shortTitle shortUrl startDate finishDate showFinishDate fullTitle text fullImgUrl adtTypeId adtWidgetId __typename } ",
+			"query getAsapWidgets {\n  student {\n    getAsapWidgetList {\n      widgetList {\n        ...AsapWidget\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment AsapWidget on AsapWidgetInfo {\n  shortImg\n  shortTitle\n  shortUrl\n  startDate\n  finishDate\n  showFinishDate\n  fullTitle\n  text\n  fullImgUrl\n  adtTypeId\n  adtWidgetId\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -988,7 +988,7 @@ export namespace Api {
 
 	export namespace GetCurrentUser {
 		export const request = createGqlQueryRequest(
-			"query getCurrentUser { user { getCurrentUser { ...CurrentUser __typename } __typename } student { getExperience { ...CurrentUserExperience __typename } __typename } } fragment CurrentUser on User { id avatarUrl login firstName middleName lastName currentSchoolStudentId __typename } fragment CurrentUserExperience on UserExperience { id cookiesCount codeReviewPoints coinsCount level { id range { id levelCode __typename } __typename } __typename } ",
+			"query getCurrentUser {\n  user {\n    getCurrentUser {\n      ...CurrentUser\n      __typename\n    }\n    __typename\n  }\n  student {\n    getExperience {\n      ...CurrentUserExperience\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CurrentUser on User {\n  id\n  avatarUrl\n  login\n  firstName\n  middleName\n  lastName\n  currentSchoolStudentId\n  __typename\n}\n\nfragment CurrentUserExperience on UserExperience {\n  id\n  cookiesCount\n  codeReviewPoints\n  coinsCount\n  level {\n    id\n    range {\n      id\n      levelCode\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -1051,7 +1051,7 @@ export namespace Api {
 
 	export namespace CalendarGetEvents {
 		export const request = createGqlQueryRequest(
-			"query calendarGetEvents($from: DateTime!, $to: DateTime!) { student { getMyCalendarEvents(from: $from, to: $to) { ...CalendarEvent __typename } __typename } } fragment CalendarEvent on CalendarEvent { id start end description eventType eventCode eventSlots { id type start end __typename } bookings { ...CalendarReviewBooking __typename } exam { ...CalendarEventExam __typename } studentCodeReview { studentGoalId __typename } activity { ...CalendarEventActivity studentFeedback { id rating comment __typename } status activityType isMandatory isWaitListActive isVisible comments { type createTs comment __typename } organizers { id login __typename } __typename } goals { goalId goalName __typename } penalty { ...Penalty __typename } __typename } fragment CalendarReviewBooking on CalendarBooking { id answerId eventSlotId task { id goalId goalName studentTaskAdditionalAttributes { cookiesCount __typename } assignmentType __typename } eventSlot { id start end event { eventUserRole __typename } __typename } verifierUser { ...CalendarReviewUser __typename } verifiableStudent { id user { ...CalendarReviewUser __typename } __typename } bookingStatus team { ...ProjectTeamMembers __typename } isOnline vcLinkUrl __typename } fragment CalendarReviewUser on User { id login __typename } fragment ProjectTeamMembers on ProjectTeamMembers { id teamLead { ...ProjectTeamMember __typename } members { ...ProjectTeamMember __typename } invitedUsers { ...ProjectTeamMember __typename } teamName teamStatus minTeamMemberCount maxTeamMemberCount __typename } fragment ProjectTeamMember on User { id avatarUrl login userExperience { level { id range { levelCode __typename } __typename } cookiesCount codeReviewPoints __typename } __typename } fragment CalendarEventExam on Exam { examId eventId beginDate endDate name location currentStudentsCount maxStudentCount updateDate goalId goalName isWaitListActive isInWaitList stopRegisterDate __typename } fragment CalendarEventActivity on ActivityEvent { activityEventId eventId name beginDate endDate isRegistered description currentStudentsCount maxStudentCount location updateDate isWaitListActive isInWaitList stopRegisterDate __typename } fragment Penalty on Penalty { comment id duration status startTime createTime penaltySlot { currentStudentsCount description duration startTime id endTime __typename } reasonId __typename } ",
+			"query calendarGetEvents($from: DateTime!, $to: DateTime!) {\n  student {\n    getMyCalendarEvents(from: $from, to: $to) {\n      ...CalendarEvent\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CalendarEvent on CalendarEvent {\n  id\n  start\n  end\n  description\n  eventType\n  eventCode\n  eventSlots {\n    id\n    type\n    start\n    end\n    __typename\n  }\n  bookings {\n    ...CalendarReviewBooking\n    __typename\n  }\n  exam {\n    ...CalendarEventExam\n    __typename\n  }\n  studentCodeReview {\n    studentGoalId\n    __typename\n  }\n  activity {\n    ...CalendarEventActivity\n    studentFeedback {\n      id\n      rating\n      comment\n      __typename\n    }\n    status\n    activityType\n    isMandatory\n    isWaitListActive\n    isVisible\n    comments {\n      type\n      createTs\n      comment\n      __typename\n    }\n    organizers {\n      id\n      login\n      __typename\n    }\n    __typename\n  }\n  goals {\n    goalId\n    goalName\n    __typename\n  }\n  penalty {\n    ...Penalty\n    __typename\n  }\n  __typename\n}\n\nfragment CalendarReviewBooking on CalendarBooking {\n  id\n  answerId\n  eventSlotId\n  task {\n    id\n    goalId\n    goalName\n    studentTaskAdditionalAttributes {\n      cookiesCount\n      __typename\n    }\n    assignmentType\n    __typename\n  }\n  eventSlot {\n    id\n    start\n    end\n    event {\n      eventUserRole\n      __typename\n    }\n    __typename\n  }\n  verifierUser {\n    ...CalendarReviewUser\n    __typename\n  }\n  verifiableStudent {\n    id\n    user {\n      ...CalendarReviewUser\n      __typename\n    }\n    __typename\n  }\n  bookingStatus\n  team {\n    ...ProjectTeamMembers\n    __typename\n  }\n  isOnline\n  vcLinkUrl\n  __typename\n}\n\nfragment CalendarReviewUser on User {\n  id\n  login\n  __typename\n}\n\nfragment ProjectTeamMembers on ProjectTeamMembers {\n  id\n  teamLead {\n    ...ProjectTeamMember\n    __typename\n  }\n  members {\n    ...ProjectTeamMember\n    __typename\n  }\n  invitedUsers {\n    ...ProjectTeamMember\n    __typename\n  }\n  teamName\n  teamStatus\n  minTeamMemberCount\n  maxTeamMemberCount\n  __typename\n}\n\nfragment ProjectTeamMember on User {\n  id\n  avatarUrl\n  login\n  userExperience {\n    level {\n      id\n      range {\n        levelCode\n        __typename\n      }\n      __typename\n    }\n    cookiesCount\n    codeReviewPoints\n    __typename\n  }\n  __typename\n}\n\nfragment CalendarEventExam on Exam {\n  examId\n  eventId\n  beginDate\n  endDate\n  name\n  location\n  currentStudentsCount\n  maxStudentCount\n  updateDate\n  goalId\n  goalName\n  isWaitListActive\n  isInWaitList\n  stopRegisterDate\n  __typename\n}\n\nfragment CalendarEventActivity on ActivityEvent {\n  activityEventId\n  eventId\n  name\n  beginDate\n  endDate\n  isRegistered\n  description\n  currentStudentsCount\n  maxStudentCount\n  location\n  updateDate\n  isWaitListActive\n  isInWaitList\n  stopRegisterDate\n  __typename\n}\n\nfragment Penalty on Penalty {\n  comment\n  id\n  duration\n  status\n  startTime\n  createTime\n  penaltySlot {\n    currentStudentsCount\n    description\n    duration\n    startTime\n    id\n    endTime\n    __typename\n  }\n  reasonId\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -1221,7 +1221,7 @@ export namespace Api {
 
 	export namespace CalendarGetMyBookings {
 		export const request = createGqlQueryRequest(
-			"query calendarGetMyBookings($from: DateTime!, $to: DateTime!) { student { getMyCalendarBookings(from: $from, to: $to) { ...CalendarReviewBooking __typename } __typename } } fragment CalendarReviewBooking on CalendarBooking { id answerId eventSlotId task { id goalId goalName studentTaskAdditionalAttributes { cookiesCount __typename } assignmentType __typename } eventSlot { id start end event { eventUserRole __typename } __typename } verifierUser { ...CalendarReviewUser __typename } verifiableStudent { id user { ...CalendarReviewUser __typename } __typename } bookingStatus team { ...ProjectTeamMembers __typename } isOnline vcLinkUrl __typename } fragment CalendarReviewUser on User { id login __typename } fragment ProjectTeamMembers on ProjectTeamMembers { id teamLead { ...ProjectTeamMember __typename } members { ...ProjectTeamMember __typename } invitedUsers { ...ProjectTeamMember __typename } teamName teamStatus minTeamMemberCount maxTeamMemberCount __typename } fragment ProjectTeamMember on User { id avatarUrl login userExperience { level { id range { levelCode __typename } __typename } cookiesCount codeReviewPoints __typename } __typename } ",
+			"query calendarGetMyBookings($from: DateTime!, $to: DateTime!) {\n  student {\n    getMyCalendarBookings(from: $from, to: $to) {\n      ...CalendarReviewBooking\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CalendarReviewBooking on CalendarBooking {\n  id\n  answerId\n  eventSlotId\n  task {\n    id\n    goalId\n    goalName\n    studentTaskAdditionalAttributes {\n      cookiesCount\n      __typename\n    }\n    assignmentType\n    __typename\n  }\n  eventSlot {\n    id\n    start\n    end\n    event {\n      eventUserRole\n      __typename\n    }\n    __typename\n  }\n  verifierUser {\n    ...CalendarReviewUser\n    __typename\n  }\n  verifiableStudent {\n    id\n    user {\n      ...CalendarReviewUser\n      __typename\n    }\n    __typename\n  }\n  bookingStatus\n  team {\n    ...ProjectTeamMembers\n    __typename\n  }\n  isOnline\n  vcLinkUrl\n  __typename\n}\n\nfragment CalendarReviewUser on User {\n  id\n  login\n  __typename\n}\n\nfragment ProjectTeamMembers on ProjectTeamMembers {\n  id\n  teamLead {\n    ...ProjectTeamMember\n    __typename\n  }\n  members {\n    ...ProjectTeamMember\n    __typename\n  }\n  invitedUsers {\n    ...ProjectTeamMember\n    __typename\n  }\n  teamName\n  teamStatus\n  minTeamMemberCount\n  maxTeamMemberCount\n  __typename\n}\n\nfragment ProjectTeamMember on User {\n  id\n  avatarUrl\n  login\n  userExperience {\n    level {\n      id\n      range {\n        levelCode\n        __typename\n      }\n      __typename\n    }\n    cookiesCount\n    codeReviewPoints\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -1303,7 +1303,7 @@ export namespace Api {
 
 	export namespace CalendarGetMyReviews {
 		export const request = createGqlQueryRequest(
-			"query calendarGetMyReviews($to: DateTime, $limit: Int) { student { getMyUpcomingBookings(to: $to, limit: $limit) { ...Review __typename } __typename } } fragment Review on CalendarBooking { id answerId eventSlot { id start end __typename } task { id title assignmentType goalId goalName studentTaskAdditionalAttributes { cookiesCount __typename } __typename } verifierUser { ...UserInBooking __typename } verifiableStudent { id user { ...UserInBooking __typename } __typename } team { ...ProjectTeamMembers __typename } bookingStatus isOnline vcLinkUrl __typename } fragment UserInBooking on User { id login avatarUrl userExperience { level { id range { levelCode __typename } __typename } __typename } __typename } fragment ProjectTeamMembers on ProjectTeamMembers { id teamLead { ...ProjectTeamMember __typename } members { ...ProjectTeamMember __typename } invitedUsers { ...ProjectTeamMember __typename } teamName teamStatus minTeamMemberCount maxTeamMemberCount __typename } fragment ProjectTeamMember on User { id avatarUrl login userExperience { level { id range { levelCode __typename } __typename } cookiesCount codeReviewPoints __typename } __typename } ",
+			"query calendarGetMyReviews($to: DateTime, $limit: Int) {\n  student {\n    getMyUpcomingBookings(to: $to, limit: $limit) {\n      ...Review\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment Review on CalendarBooking {\n  id\n  answerId\n  eventSlot {\n    id\n    start\n    end\n    __typename\n  }\n  task {\n    id\n    title\n    assignmentType\n    goalId\n    goalName\n    studentTaskAdditionalAttributes {\n      cookiesCount\n      __typename\n    }\n    __typename\n  }\n  verifierUser {\n    ...UserInBooking\n    __typename\n  }\n  verifiableStudent {\n    id\n    user {\n      ...UserInBooking\n      __typename\n    }\n    __typename\n  }\n  team {\n    ...ProjectTeamMembers\n    __typename\n  }\n  bookingStatus\n  isOnline\n  vcLinkUrl\n  __typename\n}\n\nfragment UserInBooking on User {\n  id\n  login\n  avatarUrl\n  userExperience {\n    level {\n      id\n      range {\n        levelCode\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment ProjectTeamMembers on ProjectTeamMembers {\n  id\n  teamLead {\n    ...ProjectTeamMember\n    __typename\n  }\n  members {\n    ...ProjectTeamMember\n    __typename\n  }\n  invitedUsers {\n    ...ProjectTeamMember\n    __typename\n  }\n  teamName\n  teamStatus\n  minTeamMemberCount\n  maxTeamMemberCount\n  __typename\n}\n\nfragment ProjectTeamMember on User {\n  id\n  avatarUrl\n  login\n  userExperience {\n    level {\n      id\n      range {\n        levelCode\n        __typename\n      }\n      __typename\n    }\n    cookiesCount\n    codeReviewPoints\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -1423,7 +1423,7 @@ export namespace Api {
 
 	export namespace GetPenaltyReasons {
 		export const request = createGqlQueryRequest(
-			"query getPenaltyReasons { school21 { getPenaltyReasons { id name __typename } __typename } } ",
+			"query getPenaltyReasons {\n  school21 {\n    getPenaltyReasons {\n      id\n      name\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -1454,7 +1454,7 @@ export namespace Api {
 
 	export namespace CalendarDeleteEventSlot {
 		export const request = createGqlQueryRequest(
-			"mutation calendarDeleteEventSlot($eventSlotId: ID!) { student { deleteEventSlot(eventSlotId: $eventSlotId) __typename } } ",
+			"mutation calendarDeleteEventSlot($eventSlotId: ID!) {\n  student {\n    deleteEventSlot(eventSlotId: $eventSlotId)\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -1481,7 +1481,7 @@ export namespace Api {
 
 	export namespace GetAgendaP2P {
 		export const request = createGqlQueryRequest(
-			"query getAgendaP2P($bookingId: ID!) { student { getEnrichedBooking(bookingId: $bookingId) { id eventSlot { start __typename } task { goalId goalName assignmentType studentTaskAdditionalAttributes { cookiesCount __typename } __typename } verifierUser { id login avatarUrl userExperience { level { range { levelCode __typename } __typename } __typename } __typename } verifiableStudent { user { id login avatarUrl userExperience { level { range { levelCode __typename } __typename } __typename } __typename } __typename } answerId team { teamName teamLead { id avatarUrl login userExperience { level { range { levelCode __typename } __typename } __typename } __typename } members { id avatarUrl login userExperience { level { range { levelCode __typename } __typename } __typename } __typename } __typename } bookingStatus isOnline vcLinkUrl __typename } __typename } } ",
+			"query getAgendaP2P($bookingId: ID!) {\n  student {\n    getEnrichedBooking(bookingId: $bookingId) {\n      id\n      eventSlot {\n        start\n        __typename\n      }\n      task {\n        goalId\n        goalName\n        assignmentType\n        studentTaskAdditionalAttributes {\n          cookiesCount\n          __typename\n        }\n        __typename\n      }\n      verifierUser {\n        id\n        login\n        avatarUrl\n        userExperience {\n          level {\n            range {\n              levelCode\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      verifiableStudent {\n        user {\n          id\n          login\n          avatarUrl\n          userExperience {\n            level {\n              range {\n                levelCode\n                __typename\n              }\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      answerId\n      team {\n        teamName\n        teamLead {\n          id\n          avatarUrl\n          login\n          userExperience {\n            level {\n              range {\n                levelCode\n                __typename\n              }\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        members {\n          id\n          avatarUrl\n          login\n          userExperience {\n            level {\n              range {\n                levelCode\n                __typename\n              }\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      bookingStatus\n      isOnline\n      vcLinkUrl\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -1575,7 +1575,7 @@ export namespace Api {
 
 	export namespace CreateFilledChecklist {
 		export const request = createGqlQueryRequest(
-			"mutation createFilledChecklist($studentAnswerId: ID!) { student { createFilledChecklist(studentAnswerId: $studentAnswerId) { id gitlabStudentProjectUrl { sshLink httpsLink __typename } checklist { ...FormChecklist __typename } moduleInfoP2P { ...FilledChecklistModuleInfo __typename } progressCheckInfo { reviewUserCount reviewUserCountExecuted __typename } verifiableUsers { teamWithMembers { team { id name __typename } members { ...TeamMember __typename } __typename } user { ...TeamMemberUser __typename } __typename } video { filledChecklistId link status statusDetails __typename } __typename } __typename } } fragment FormChecklist on Checklist { language introduction guidelines sectionList { ...FormChecklistSection __typename } quickActions __typename } fragment FormChecklistSection on ChecklistSection { checklistSectionId name description kindQuestionId questionList { ...FormChecklistQuestion __typename } __typename } fragment FormChecklistQuestion on SectionQuestion { sectionQuestionId name description taskAssessmentScale { criterionScaleId type description scaleWeights { key value __typename } __typename } __typename } fragment FilledChecklistModuleInfo on ModuleInfoP2P { moduleName executionType periodOfVerification __typename } fragment TeamMember on TeamMember { user { ...TeamMemberUser __typename } role __typename } fragment TeamMemberUser on User { id avatarUrl login userExperience { level { id levelCode range { levelCode __typename } __typename } cookiesCount codeReviewPoints __typename } __typename } ",
+			"mutation createFilledChecklist($studentAnswerId: ID!) {\n  student {\n    createFilledChecklist(studentAnswerId: $studentAnswerId) {\n      id\n      gitlabStudentProjectUrl {\n        sshLink\n        httpsLink\n        __typename\n      }\n      checklist {\n        ...FormChecklist\n        __typename\n      }\n      moduleInfoP2P {\n        ...FilledChecklistModuleInfo\n        __typename\n      }\n      progressCheckInfo {\n        reviewUserCount\n        reviewUserCountExecuted\n        __typename\n      }\n      verifiableUsers {\n        teamWithMembers {\n          team {\n            id\n            name\n            __typename\n          }\n          members {\n            ...TeamMember\n            __typename\n          }\n          __typename\n        }\n        user {\n          ...TeamMemberUser\n          __typename\n        }\n        __typename\n      }\n      video {\n        filledChecklistId\n        link\n        status\n        statusDetails\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment FormChecklist on Checklist {\n  language\n  introduction\n  guidelines\n  sectionList {\n    ...FormChecklistSection\n    __typename\n  }\n  quickActions\n  __typename\n}\n\nfragment FormChecklistSection on ChecklistSection {\n  checklistSectionId\n  name\n  description\n  kindQuestionId\n  questionList {\n    ...FormChecklistQuestion\n    __typename\n  }\n  __typename\n}\n\nfragment FormChecklistQuestion on SectionQuestion {\n  sectionQuestionId\n  name\n  description\n  taskAssessmentScale {\n    criterionScaleId\n    type\n    description\n    scaleWeights {\n      key\n      value\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment FilledChecklistModuleInfo on ModuleInfoP2P {\n  moduleName\n  executionType\n  periodOfVerification\n  __typename\n}\n\nfragment TeamMember on TeamMember {\n  user {\n    ...TeamMemberUser\n    __typename\n  }\n  role\n  __typename\n}\n\nfragment TeamMemberUser on User {\n  id\n  avatarUrl\n  login\n  userExperience {\n    level {\n      id\n      levelCode\n      range {\n        levelCode\n        __typename\n      }\n      __typename\n    }\n    cookiesCount\n    codeReviewPoints\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -1723,7 +1723,7 @@ export namespace Api {
 
 	export namespace GetCredentialsByLogin {
 		export const request = createGqlQueryRequest(
-			"query getCredentialsByLogin($login: String!) { school21 { getStudentByLogin(login: $login) { studentId userId schoolId isActive isGraduate __typename } __typename } } ",
+			"query getCredentialsByLogin($login: String!) {\n  school21 {\n    getStudentByLogin(login: $login) {\n      studentId\n      userId\n      schoolId\n      isActive\n      isGraduate\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -1759,7 +1759,7 @@ export namespace Api {
 
 	export namespace PublicProfileGetPersonalInfo {
 		export const request = createGqlQueryRequest(
-			"query publicProfileGetPersonalInfo($userId: UUID!, $studentId: UUID!, $login: String!, $schoolId: UUID!) { student { getAvatarByUserId(userId: $userId) getStageGroupS21PublicProfile(studentId: $studentId) { waveId waveName eduForm __typename } getExperiencePublicProfile(userId: $userId) { value level { levelCode range { leftBorder rightBorder __typename } __typename } cookiesCount coinsCount codeReviewPoints __typename } getEmailbyUserId(userId: $userId) getWorkstationByLogin(login: $login) { workstationId hostName row number __typename } getClassRoomByLogin(login: $login) { id number floor __typename } getFeedbackStatisticsAverageScore(studentId: $studentId) { countFeedback feedbackAverageScore { categoryCode categoryName value __typename } __typename } __typename } user { getSchool(schoolId: $schoolId) { id fullName shortName address __typename } __typename } } ",
+			"query publicProfileGetPersonalInfo($userId: UUID!, $studentId: UUID!, $login: String!, $schoolId: UUID!) {\n  student {\n    getAvatarByUserId(userId: $userId)\n    getStageGroupS21PublicProfile(studentId: $studentId) {\n      waveId\n      waveName\n      eduForm\n      __typename\n    }\n    getExperiencePublicProfile(userId: $userId) {\n      value\n      level {\n        levelCode\n        range {\n          leftBorder\n          rightBorder\n          __typename\n        }\n        __typename\n      }\n      cookiesCount\n      coinsCount\n      codeReviewPoints\n      __typename\n    }\n    getEmailbyUserId(userId: $userId)\n    getWorkstationByLogin(login: $login) {\n      workstationId\n      hostName\n      row\n      number\n      __typename\n    }\n    getClassRoomByLogin(login: $login) {\n      id\n      number\n      floor\n      __typename\n    }\n    getFeedbackStatisticsAverageScore(studentId: $studentId) {\n      countFeedback\n      feedbackAverageScore {\n        categoryCode\n        categoryName\n        value\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  user {\n    getSchool(schoolId: $schoolId) {\n      id\n      fullName\n      shortName\n      address\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -1865,7 +1865,7 @@ export namespace Api {
 
 	export namespace GetDismissInfoByStudentId {
 		export const request = createGqlQueryRequest(
-			"query getDismissInfoByStudentId($studentId: UUID!) { school21 { getDismissInfoByStudentId(studentId: $studentId) { dismissTypeId dismissTs lastStageGroupS21 { waveId waveName eduForm active __typename } __typename } __typename } } ",
+			"query getDismissInfoByStudentId($studentId: UUID!) {\n  school21 {\n    getDismissInfoByStudentId(studentId: $studentId) {\n      dismissTypeId\n      dismissTs\n      lastStageGroupS21 {\n        waveId\n        waveName\n        eduForm\n        active\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -1892,7 +1892,7 @@ export namespace Api {
 
 	export namespace PublicProfileGetCoalition {
 		export const request = createGqlQueryRequest(
-			"query publicProfileGetCoalition($userId: UUID!) { student { getUserTournamentWidget(userId: $userId) { coalitionMember { coalition { avatarUrl color name memberCount __typename } currentTournamentPowerRank { rank power { id points __typename } __typename } __typename } lastTournamentResult { userRank power __typename } __typename } __typename } } ",
+			"query publicProfileGetCoalition($userId: UUID!) {\n  student {\n    getUserTournamentWidget(userId: $userId) {\n      coalitionMember {\n        coalition {\n          avatarUrl\n          color\n          name\n          memberCount\n          __typename\n        }\n        currentTournamentPowerRank {\n          rank\n          power {\n            id\n            points\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      lastTournamentResult {\n        userRank\n        power\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -1957,7 +1957,7 @@ export namespace Api {
 
 	export namespace PublicProfileGetAchievements {
 		export const request = createGqlQueryRequest(
-			"query publicProfileGetAchievements($userId: UUID!) { student { getBadgesPublicProfile(userId: $userId) { points id badge { id name avatarUrl __typename } __typename } __typename } } ",
+			"query publicProfileGetAchievements($userId: UUID!) {\n  student {\n    getBadgesPublicProfile(userId: $userId) {\n      points\n      id\n      badge {\n        id\n        name\n        avatarUrl\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -1998,7 +1998,7 @@ export namespace Api {
 
 	export namespace PublicProfileLoadAverageLogtime {
 		export const request = createGqlQueryRequest(
-			"query publicProfileLoadAverageLogtime($login: String!, $schoolID: UUID!, $date: Date!) { school21 { loadAverageLogtime(login: $login, schoolID: $schoolID, date: $date) { week month weekPerMonth __typename } __typename } } ",
+			"query publicProfileLoadAverageLogtime($login: String!, $schoolID: UUID!, $date: Date!) {\n  school21 {\n    loadAverageLogtime(login: $login, schoolID: $schoolID, date: $date) {\n      week\n      month\n      weekPerMonth\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2034,7 +2034,7 @@ export namespace Api {
 
 	export namespace PublicProfileLoadStageGroups {
 		export const request = createGqlQueryRequest(
-			"query publicProfileLoadStageGroups($userId: UUID!, $schoolId: UUID!) { school21 { loadStudentStageGroupsS21PublicProfile(userId: $userId, schoolId: $schoolId) { stageGroupStudentId studentId stageGroupS21 { waveId waveName eduForm active __typename } safeSchool { fullName __typename } __typename } __typename } } ",
+			"query publicProfileLoadStageGroups($userId: UUID!, $schoolId: UUID!) {\n  school21 {\n    loadStudentStageGroupsS21PublicProfile(userId: $userId, schoolId: $schoolId) {\n      stageGroupStudentId\n      studentId\n      stageGroupS21 {\n        waveId\n        waveName\n        eduForm\n        active\n        __typename\n      }\n      safeSchool {\n        fullName\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2083,7 +2083,7 @@ export namespace Api {
 
 	export namespace PublicProfileGetSoftSkills {
 		export const request = createGqlQueryRequest(
-			"query publicProfileGetSoftSkills($studentId: UUID!) { school21 { getSoftSkillsByStudentId(studentId: $studentId) { id type code totalPower hueSaturationLightness __typename } getSoftSkillLimitByStudentId(studentId: $studentId) { powerLimit __typename } __typename } } ",
+			"query publicProfileGetSoftSkills($studentId: UUID!) {\n  school21 {\n    getSoftSkillsByStudentId(studentId: $studentId) {\n      id\n      type\n      code\n      totalPower\n      hueSaturationLightness\n      __typename\n    }\n    getSoftSkillLimitByStudentId(studentId: $studentId) {\n      powerLimit\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2125,7 +2125,7 @@ export namespace Api {
 
 	export namespace PublicProfileGetXpGraph {
 		export const request = createGqlQueryRequest(
-			"query publicProfileGetXpGraph($userId: UUID!) { student { getExperienceHistoryDate(userId: $userId) { history { awardDate expValue __typename } __typename } __typename } } ",
+			"query publicProfileGetXpGraph($userId: UUID!) {\n  student {\n    getExperienceHistoryDate(userId: $userId) {\n      history {\n        awardDate\n        expValue\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2163,7 +2163,7 @@ export namespace Api {
 
 	export namespace PublicProfileGetStudentTraffic {
 		export const request = createGqlQueryRequest(
-			"query publicProfileGetStudentTraffic($login: String!, $schoolID: UUID!, $date: Date!) { student { getStudentTraffic(login: $login, schoolID: $schoolID, date: $date) { days { date periodOnCampus periodAuthorizSDP periodAuthorizIMac __typename } endDate startDate __typename } __typename } } ",
+			"query publicProfileGetStudentTraffic($login: String!, $schoolID: UUID!, $date: Date!) {\n  student {\n    getStudentTraffic(login: $login, schoolID: $schoolID, date: $date) {\n      days {\n        date\n        periodOnCampus\n        periodAuthorizSDP\n        periodAuthorizIMac\n        __typename\n      }\n      endDate\n      startDate\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2207,7 +2207,7 @@ export namespace Api {
 
 	export namespace GetUserNotifications {
 		export const request = createGqlQueryRequest(
-			"query getUserNotifications($paging: PagingInput!) { student { getS21Notifications(paging: $paging) { notifications { id relatedObjectType relatedObjectId message time wasRead groupName __typename } totalCount groupNames __typename } __typename } } ",
+			"query getUserNotifications($paging: PagingInput!) {\n  student {\n    getS21Notifications(paging: $paging) {\n      notifications {\n        id\n        relatedObjectType\n        relatedObjectId\n        message\n        time\n        wasRead\n        groupName\n        __typename\n      }\n      totalCount\n      groupNames\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2257,7 +2257,7 @@ export namespace Api {
 
 	export namespace ReadUserNotifications {
 		export const request = createGqlQueryRequest(
-			"mutation readUserNotifications($notificationIds: [ID!]!) { student { readNotifications(notificationIds: $notificationIds) __typename } } ",
+			"mutation readUserNotifications($notificationIds: [ID!]!) {\n  student {\n    readNotifications(notificationIds: $notificationIds)\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2284,7 +2284,7 @@ export namespace Api {
 
 	export namespace SaveFilledChecklist {
 		export const request = createGqlQueryRequest(
-			"mutation saveFilledChecklist($filledChecklistInput: ChecklistFilledInput!) { student { completeP2pCheck(checklistFilledInput: $filledChecklistInput) __typename } } ",
+			"mutation saveFilledChecklist($filledChecklistInput: ChecklistFilledInput!) {\n  student {\n    completeP2pCheck(checklistFilledInput: $filledChecklistInput)\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2323,7 +2323,7 @@ export namespace Api {
 
 	export namespace GetInvitationsCount {
 		export const request = createGqlQueryRequest(
-			"query getInvitationsCount { team { getCreatedJoinTeamRequestCount __typename } } ",
+			"query getInvitationsCount {\n  team {\n    getCreatedJoinTeamRequestCount\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2348,7 +2348,7 @@ export namespace Api {
 
 	export namespace GetStudentCurrentProjects {
 		export const request = createGqlQueryRequest(
-			"query getStudentCurrentProjects($userId: ID!) { student { getStudentCurrentProjects(userId: $userId) { ...StudentProjectItem __typename } __typename } } fragment StudentProjectItem on StudentItem { goalId name description experience dateTime finalPercentage laboriousness executionType goalStatus courseType displayedCourseStatus amountAnswers amountMembers amountJoinedMembers amountReviewedAnswers amountCodeReviewMembers amountCurrentCodeReviewMembers groupName localCourseId __typename } ",
+			"query getStudentCurrentProjects($userId: ID!) {\n  student {\n    getStudentCurrentProjects(userId: $userId) {\n      ...StudentProjectItem\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment StudentProjectItem on StudentItem {\n  goalId\n  name\n  description\n  experience\n  dateTime\n  finalPercentage\n  laboriousness\n  executionType\n  goalStatus\n  courseType\n  displayedCourseStatus\n  amountAnswers\n  amountMembers\n  amountJoinedMembers\n  amountReviewedAnswers\n  amountCodeReviewMembers\n  amountCurrentCodeReviewMembers\n  groupName\n  localCourseId\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -2398,7 +2398,7 @@ export namespace Api {
 
 	export namespace GetAvailableCodeReviewProjects {
 		export const request = createGqlQueryRequest(
-			"query getAvailableCodeReviewProjects($paging: PagingInput!) { student { getAvailableCodeReviewProjects(paging: $paging) { ...CodeReviewProject __typename } __typename } } fragment CodeReviewProject on CodeReview { goalId goalTitle studentGoalId studentCodeReviewStatus goalExecutionType studentTaskAdditionalAttributesModel { codeReviewCost codeReviewDuration __typename } __typename } ",
+			"query getAvailableCodeReviewProjects($paging: PagingInput!) {\n  student {\n    getAvailableCodeReviewProjects(paging: $paging) {\n      ...CodeReviewProject\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CodeReviewProject on CodeReview {\n  goalId\n  goalTitle\n  studentGoalId\n  studentCodeReviewStatus\n  goalExecutionType\n  studentTaskAdditionalAttributesModel {\n    codeReviewCost\n    codeReviewDuration\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -2446,7 +2446,7 @@ export namespace Api {
 
 	export namespace GetFirstRoundCodeReviewProjects {
 		export const request = createGqlQueryRequest(
-			"query getFirstRoundCodeReviewProjects($paging: PagingInput!) { student { getFirstRoundCodeReviewProjects(paging: $paging) { ...CodeReviewProject __typename } __typename } } fragment CodeReviewProject on CodeReview { goalId goalTitle studentGoalId studentCodeReviewStatus goalExecutionType studentTaskAdditionalAttributesModel { codeReviewCost codeReviewDuration __typename } __typename } ",
+			"query getFirstRoundCodeReviewProjects($paging: PagingInput!) {\n  student {\n    getFirstRoundCodeReviewProjects(paging: $paging) {\n      ...CodeReviewProject\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CodeReviewProject on CodeReview {\n  goalId\n  goalTitle\n  studentGoalId\n  studentCodeReviewStatus\n  goalExecutionType\n  studentTaskAdditionalAttributesModel {\n    codeReviewCost\n    codeReviewDuration\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -2478,7 +2478,7 @@ export namespace Api {
 
 	export namespace GetSecondRoundCodeReviewProjects {
 		export const request = createGqlQueryRequest(
-			"query getSecondRoundCodeReviewProjects($paging: PagingInput!) { student { getSecondRoundCodeReviewProjects(paging: $paging) { ...CodeReviewProject __typename } __typename } } fragment CodeReviewProject on CodeReview { goalId goalTitle studentGoalId studentCodeReviewStatus goalExecutionType studentTaskAdditionalAttributesModel { codeReviewCost codeReviewDuration __typename } __typename } ",
+			"query getSecondRoundCodeReviewProjects($paging: PagingInput!) {\n  student {\n    getSecondRoundCodeReviewProjects(paging: $paging) {\n      ...CodeReviewProject\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CodeReviewProject on CodeReview {\n  goalId\n  goalTitle\n  studentGoalId\n  studentCodeReviewStatus\n  goalExecutionType\n  studentTaskAdditionalAttributesModel {\n    codeReviewCost\n    codeReviewDuration\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -2510,7 +2510,7 @@ export namespace Api {
 
 	export namespace GetCodeReviewProjectInfo {
 		export const request = createGqlQueryRequest(
-			"query getCodeReviewProjectInfo($studentGoalId: ID!) { student { getStudentModuleByStudentGoalId(studentGoalId: $studentGoalId) { ...CodeReviewProjectInfo __typename } __typename } } fragment CodeReviewProjectInfo on StudentModule { id moduleTitle studyModule { duration stage { name __typename } __typename } currentTask { ...CodeReviewCurrentTaskInfo __typename } __typename } fragment CodeReviewCurrentTaskInfo on StudentTask { id taskId task { content { body __typename } assignmentType studentTaskAdditionalAttributes { codeReviewDuration codeReviewCost __typename } __typename } __typename } ",
+			"query getCodeReviewProjectInfo($studentGoalId: ID!) {\n  student {\n    getStudentModuleByStudentGoalId(studentGoalId: $studentGoalId) {\n      ...CodeReviewProjectInfo\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CodeReviewProjectInfo on StudentModule {\n  id\n  moduleTitle\n  studyModule {\n    duration\n    stage {\n      name\n      __typename\n    }\n    __typename\n  }\n  currentTask {\n    ...CodeReviewCurrentTaskInfo\n    __typename\n  }\n  __typename\n}\n\nfragment CodeReviewCurrentTaskInfo on StudentTask {\n  id\n  taskId\n  task {\n    content {\n      body\n      __typename\n    }\n    assignmentType\n    studentTaskAdditionalAttributes {\n      codeReviewDuration\n      codeReviewCost\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -2581,7 +2581,7 @@ export namespace Api {
 
 	export namespace GetCodeReviewMyStudent {
 		export const request = createGqlQueryRequest(
-			"query getCodeReviewMyStudent($studentGoalId: ID!) { student { getMyStudentCodeReview(studentGoalId: $studentGoalId) { reviewerCommentsCount codeReviewRounds { ...CodeReviewRound __typename } __typename } __typename } } fragment CodeReviewRound on CodeReviewRound { eventId codeReviewRoundType codeReviewStatus startTime endTime mergeRequestURL createTime __typename } ",
+			"query getCodeReviewMyStudent($studentGoalId: ID!) {\n  student {\n    getMyStudentCodeReview(studentGoalId: $studentGoalId) {\n      reviewerCommentsCount\n      codeReviewRounds {\n        ...CodeReviewRound\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CodeReviewRound on CodeReviewRound {\n  eventId\n  codeReviewRoundType\n  codeReviewStatus\n  startTime\n  endTime\n  mergeRequestURL\n  createTime\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -2625,7 +2625,7 @@ export namespace Api {
 
 	export namespace CalendarGetStudentCodeReviews {
 		export const request = createGqlQueryRequest(
-			"query calendarGetStudentCodeReviews($studentGoalId: ID!) { student { getStudentCodeReviews(studentGoalId: $studentGoalId) { secondRoundStartDate __typename } __typename } } ",
+			"query calendarGetStudentCodeReviews($studentGoalId: ID!) {\n  student {\n    getStudentCodeReviews(studentGoalId: $studentGoalId) {\n      secondRoundStartDate\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2657,7 +2657,7 @@ export namespace Api {
 
 	export namespace CalendarGetCodeReviewData {
 		export const request = createGqlQueryRequest(
-			"query calendarGetCodeReviewData($studentGoalId: ID!) { student { getStudentModuleByStudentGoalId(studentGoalId: $studentGoalId) { moduleTitle currentTask { task { studentTaskAdditionalAttributes { codeReviewDuration __typename } __typename } __typename } __typename } __typename } } ",
+			"query calendarGetCodeReviewData($studentGoalId: ID!) {\n  student {\n    getStudentModuleByStudentGoalId(studentGoalId: $studentGoalId) {\n      moduleTitle\n      currentTask {\n        task {\n          studentTaskAdditionalAttributes {\n            codeReviewDuration\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2705,7 +2705,7 @@ export namespace Api {
 
 	export namespace CalendarAddCodeReviewToEventSlot {
 		export const request = createGqlQueryRequest(
-			"mutation calendarAddCodeReviewToEventSlot($studentGoalId: ID!, $startTime: DateTime!) { student { addBookingCodeReviewToEventSlot( studentGoalId: $studentGoalId startTime: $startTime ) { id __typename } __typename } } ",
+			"mutation calendarAddCodeReviewToEventSlot($studentGoalId: ID!, $startTime: DateTime!) {\n  student {\n    addBookingCodeReviewToEventSlot(\n      studentGoalId: $studentGoalId\n      startTime: $startTime\n    ) {\n      id\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2738,7 +2738,7 @@ export namespace Api {
 
 	export namespace CalendarAddBookingToEventSlot {
 		export const request = createGqlQueryRequest(
-			"mutation calendarAddBookingToEventSlot( $answerId: ID! $startTime: DateTime! $wasStaffSlotChosen: Boolean! $isOnline: Boolean ) { student { addBookingP2PToEventSlot( answerId: $answerId startTime: $startTime wasStaffSlotChosen: $wasStaffSlotChosen isOnline: $isOnline ) { id __typename } __typename } } ",
+			"mutation calendarAddBookingToEventSlot(\n	$answerId: ID!\n	$startTime: DateTime!\n	$wasStaffSlotChosen: Boolean!\n	$isOnline: Boolean\n) {\n	student {\n		addBookingP2PToEventSlot(\n			answerId: $answerId\n			startTime: $startTime\n			wasStaffSlotChosen: $wasStaffSlotChosen\n			isOnline: $isOnline\n		) {\n			id\n			__typename\n		}\n		__typename\n	}\n}\n",
 		)
 
 		export namespace Variables {
@@ -2773,7 +2773,7 @@ export namespace Api {
 
 	export namespace GetCodeReviewPointChargedOff {
 		export const request = createGqlQueryRequest(
-			"query getCodeReviewPointChargedOff($goalId: ID!) { student { getCodeReviewPointChargedOff(goalId: $goalId) __typename } } ",
+			"query getCodeReviewPointChargedOff($goalId: ID!) {\n  student {\n    getCodeReviewPointChargedOff(goalId: $goalId)\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2800,7 +2800,7 @@ export namespace Api {
 
 	export namespace GetProjectConsistencyInfo {
 		export const request = createGqlQueryRequest(
-			"query getProjectConsistencyInfo($goalId: ID!) { school21 { loadGoalConsistencyInfo(goalId: $goalId) { goalId isConsistent __typename } __typename } } ",
+			"query getProjectConsistencyInfo($goalId: ID!) {\n  school21 {\n    loadGoalConsistencyInfo(goalId: $goalId) {\n      goalId\n      isConsistent\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -2833,7 +2833,7 @@ export namespace Api {
 
 	export namespace GetProjectInfo {
 		export const request = createGqlQueryRequest(
-			"query getProjectInfo($goalId: ID!) { student { getModuleById(goalId: $goalId) { ...ProjectInfo __typename } getModuleCoverInformation(goalId: $goalId) { ...ModuleCoverInfo __typename } getP2PChecksInfo(goalId: $goalId) { ...P2PInfo __typename } getStudentCodeReviewByGoalId(goalId: $goalId) { ...StudentsCodeReview __typename } __typename } } fragment ProjectInfo on StudentModule { id moduleTitle finalPercentage finalPoint goalExecutionType displayedGoalStatus accessBeforeStartProgress resultModuleCompletion finishedExecutionDateByScheduler durationFromStageSubjectGroupPlan currentAttemptNumber isDeadlineFree isRetryAvailable localCourseId courseBaseParameters { isGradedCourse __typename } teamSettings { ...teamSettingsInfo __typename } studyModule { id idea duration goalPoint retrySettings { ...RetrySettings __typename } levels { id goalElements { id tasks { id taskId __typename } __typename } __typename } __typename } currentTask { ...CurrentInternshipTaskInfo __typename } __typename } fragment teamSettingsInfo on TeamSettings { teamCreateOption minAmountMember maxAmountMember enableSurrenderTeam __typename } fragment RetrySettings on ModuleAttemptsSettings { maxModuleAttempts isUnlimitedAttempts __typename } fragment CurrentInternshipTaskInfo on StudentTask { id taskId task { id assignmentType studentTaskAdditionalAttributes { cookiesCount maxCodeReviewCount codeReviewCost ciCdMode __typename } checkTypes __typename } lastAnswer { id __typename } teamSettings { ...teamSettingsInfo __typename } __typename } fragment ModuleCoverInfo on ModuleCoverInformation { isOwnStudentTimeline softSkills { softSkillId softSkillName totalPower maxPower currentUserPower achievedUserPower teamRole __typename } timeline { ...TimelineItem __typename } projectStatistics { ...ProjectStatistics __typename } __typename } fragment TimelineItem on ProjectTimelineItem { type status start end children { ...TimelineItemChildren __typename } __typename } fragment TimelineItemChildren on ProjectTimelineItem { type elementType status start end order __typename } fragment ProjectStatistics on ProjectStatistics { registeredStudents inProgressStudents evaluationStudents finishedStudents acceptedStudents failedStudents retriedStudentsPercentage groupProjectStatistics { ...GroupProjectStatistics __typename } __typename } fragment GroupProjectStatistics on GroupProjectStatistics { inProgressTeams evaluationTeams finishedTeams acceptedTeams failedTeams __typename } fragment P2PInfo on P2PChecksInfo { cookiesCount periodOfVerification projectReviewsInfo { ...ProjectReviewsInfo __typename } __typename } fragment ProjectReviewsInfo on ProjectReviewsInfo { reviewByStudentCount relevantReviewByStudentsCount reviewByInspectionStaffCount relevantReviewByInspectionStaffCount __typename } fragment StudentsCodeReview on StudentCodeReviewsWithCountRound { countRound1 countRound2 codeReviewsInfo { maxCodeReviewCount codeReviewDuration codeReviewCost __typename } __typename } ",
+			"query getProjectInfo($goalId: ID!) {\n  student {\n    getModuleById(goalId: $goalId) {\n      ...ProjectInfo\n      __typename\n    }\n    getModuleCoverInformation(goalId: $goalId) {\n      ...ModuleCoverInfo\n      __typename\n    }\n    getP2PChecksInfo(goalId: $goalId) {\n      ...P2PInfo\n      __typename\n    }\n    getStudentCodeReviewByGoalId(goalId: $goalId) {\n      ...StudentsCodeReview\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment ProjectInfo on StudentModule {\n  id\n  moduleTitle\n  finalPercentage\n  finalPoint\n  goalExecutionType\n  displayedGoalStatus\n  accessBeforeStartProgress\n  resultModuleCompletion\n  finishedExecutionDateByScheduler\n  durationFromStageSubjectGroupPlan\n  currentAttemptNumber\n  isDeadlineFree\n  isRetryAvailable\n  localCourseId\n  courseBaseParameters {\n    isGradedCourse\n    __typename\n  }\n  teamSettings {\n    ...teamSettingsInfo\n    __typename\n  }\n  studyModule {\n    id\n    idea\n    duration\n    goalPoint\n    retrySettings {\n      ...RetrySettings\n      __typename\n    }\n    levels {\n      id\n      goalElements {\n        id\n        tasks {\n          id\n          taskId\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  currentTask {\n    ...CurrentInternshipTaskInfo\n    __typename\n  }\n  __typename\n}\n\nfragment teamSettingsInfo on TeamSettings {\n  teamCreateOption\n  minAmountMember\n  maxAmountMember\n  enableSurrenderTeam\n  __typename\n}\n\nfragment RetrySettings on ModuleAttemptsSettings {\n  maxModuleAttempts\n  isUnlimitedAttempts\n  __typename\n}\n\nfragment CurrentInternshipTaskInfo on StudentTask {\n  id\n  taskId\n  task {\n    id\n    assignmentType\n    studentTaskAdditionalAttributes {\n      cookiesCount\n      maxCodeReviewCount\n      codeReviewCost\n      ciCdMode\n      __typename\n    }\n    checkTypes\n    __typename\n  }\n  lastAnswer {\n    id\n    __typename\n  }\n  teamSettings {\n    ...teamSettingsInfo\n    __typename\n  }\n  __typename\n}\n\nfragment ModuleCoverInfo on ModuleCoverInformation {\n  isOwnStudentTimeline\n  softSkills {\n    softSkillId\n    softSkillName\n    totalPower\n    maxPower\n    currentUserPower\n    achievedUserPower\n    teamRole\n    __typename\n  }\n  timeline {\n    ...TimelineItem\n    __typename\n  }\n  projectStatistics {\n    ...ProjectStatistics\n    __typename\n  }\n  __typename\n}\n\nfragment TimelineItem on ProjectTimelineItem {\n  type\n  status\n  start\n  end\n  children {\n    ...TimelineItemChildren\n    __typename\n  }\n  __typename\n}\n\nfragment TimelineItemChildren on ProjectTimelineItem {\n  type\n  elementType\n  status\n  start\n  end\n  order\n  __typename\n}\n\nfragment ProjectStatistics on ProjectStatistics {\n  registeredStudents\n  inProgressStudents\n  evaluationStudents\n  finishedStudents\n  acceptedStudents\n  failedStudents\n  retriedStudentsPercentage\n  groupProjectStatistics {\n    ...GroupProjectStatistics\n    __typename\n  }\n  __typename\n}\n\nfragment GroupProjectStatistics on GroupProjectStatistics {\n  inProgressTeams\n  evaluationTeams\n  finishedTeams\n  acceptedTeams\n  failedTeams\n  __typename\n}\n\nfragment P2PInfo on P2PChecksInfo {\n  cookiesCount\n  periodOfVerification\n  projectReviewsInfo {\n    ...ProjectReviewsInfo\n    __typename\n  }\n  __typename\n}\n\nfragment ProjectReviewsInfo on ProjectReviewsInfo {\n  reviewByStudentCount\n  relevantReviewByStudentsCount\n  reviewByInspectionStaffCount\n  relevantReviewByInspectionStaffCount\n  __typename\n}\n\nfragment StudentsCodeReview on StudentCodeReviewsWithCountRound {\n  countRound1\n  countRound2\n  codeReviewsInfo {\n    maxCodeReviewCount\n    codeReviewDuration\n    codeReviewCost\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -3038,7 +3038,7 @@ export namespace Api {
 
 	export namespace GetProjectAttemptEvaluationsInfo {
 		export const request = createGqlQueryRequest(
-			"query getProjectAttemptEvaluationsInfo($goalId: ID!, $studentId: UUID!) { school21 { getProjectAttemptEvaluationsInfo_V1(goalId: $goalId, studentId: $studentId) { ...ProjectAttemptEvaluations_V1 __typename } __typename } } fragment ProjectAttemptEvaluations_V1 on ProjectAttemptEvaluationsInfo_V1 { studentAnswerId studentGoalAttemptId attemptStatus attemptResult { ...AtemptResult __typename } team { ...AttemptTeamWithMembers __typename } p2p { ...P2PEvaluation __typename } auto { status receivedPercentage endTimeCheck resultInfo __typename } codeReview { averageMark studentCodeReviews { user { avatarUrl login __typename } finalMark markTime reviewerCommentsCount __typename } __typename } __typename } fragment AtemptResult on StudentGoalAttempt { finalPointProject finalPercentageProject resultModuleCompletion resultDate __typename } fragment AttemptTeamWithMembers on TeamWithMembers { team { id name __typename } members { ...TeamMemberWithRole __typename } __typename } fragment TeamMemberWithRole on TeamMember { role user { ...ProjectTeamMember __typename } __typename } fragment ProjectTeamMember on User { id avatarUrl login userExperience { level { id range { levelCode __typename } __typename } cookiesCount codeReviewPoints __typename } __typename } fragment P2PEvaluation on P2PEvaluationInfo { status checklist { ...Checklist __typename } __typename } fragment Checklist on FilledChecklist { id checklistId endTimeCheck startTimeCheck reviewer { avatarUrl login businessAdminRoles { id school { id organizationType __typename } __typename } __typename } reviewFeedback { ...EvaluationFeedback __typename } comment receivedPoint receivedPercentage quickAction checkType video { ...P2PReviewVideo __typename } __typename } fragment EvaluationFeedback on ReviewFeedback { id comment filledChecklist { id __typename } reviewFeedbackCategoryValues { feedbackCategory feedbackValue id __typename } __typename } fragment P2PReviewVideo on OnlineReviewVideo { link status __typename } ",
+			"query getProjectAttemptEvaluationsInfo($goalId: ID!, $studentId: UUID!) {\n  school21 {\n    getProjectAttemptEvaluationsInfo_V1(goalId: $goalId, studentId: $studentId) {\n      ...ProjectAttemptEvaluations_V1\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment ProjectAttemptEvaluations_V1 on ProjectAttemptEvaluationsInfo_V1 {\n  studentAnswerId\n  studentGoalAttemptId\n  attemptStatus\n  attemptResult {\n    ...AtemptResult\n    __typename\n  }\n  team {\n    ...AttemptTeamWithMembers\n    __typename\n  }\n  p2p {\n    ...P2PEvaluation\n    __typename\n  }\n  auto {\n    status\n    receivedPercentage\n    endTimeCheck\n    resultInfo\n    __typename\n  }\n  codeReview {\n    averageMark\n    studentCodeReviews {\n      user {\n        avatarUrl\n        login\n        __typename\n      }\n      finalMark\n      markTime\n      reviewerCommentsCount\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment AtemptResult on StudentGoalAttempt {\n  finalPointProject\n  finalPercentageProject\n  resultModuleCompletion\n  resultDate\n  __typename\n}\n\nfragment AttemptTeamWithMembers on TeamWithMembers {\n  team {\n    id\n    name\n    __typename\n  }\n  members {\n    ...TeamMemberWithRole\n    __typename\n  }\n  __typename\n}\n\nfragment TeamMemberWithRole on TeamMember {\n  role\n  user {\n    ...ProjectTeamMember\n    __typename\n  }\n  __typename\n}\n\nfragment ProjectTeamMember on User {\n  id\n  avatarUrl\n  login\n  userExperience {\n    level {\n      id\n      range {\n        levelCode\n        __typename\n      }\n      __typename\n    }\n    cookiesCount\n    codeReviewPoints\n    __typename\n  }\n  __typename\n}\n\nfragment P2PEvaluation on P2PEvaluationInfo {\n  status\n  checklist {\n    ...Checklist\n    __typename\n  }\n  __typename\n}\n\nfragment Checklist on FilledChecklist {\n  id\n  checklistId\n  endTimeCheck\n  startTimeCheck\n  reviewer {\n    avatarUrl\n    login\n    businessAdminRoles {\n      id\n      school {\n        id\n        organizationType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  reviewFeedback {\n    ...EvaluationFeedback\n    __typename\n  }\n  comment\n  receivedPoint\n  receivedPercentage\n  quickAction\n  checkType\n  video {\n    ...P2PReviewVideo\n    __typename\n  }\n  __typename\n}\n\nfragment EvaluationFeedback on ReviewFeedback {\n  id\n  comment\n  filledChecklist {\n    id\n    __typename\n  }\n  reviewFeedbackCategoryValues {\n    feedbackCategory\n    feedbackValue\n    id\n    __typename\n  }\n  __typename\n}\n\nfragment P2PReviewVideo on OnlineReviewVideo {\n  link\n  status\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -3149,7 +3149,7 @@ export namespace Api {
 
 	export namespace GetProjectGitlabStatus {
 		export const request = createGqlQueryRequest(
-			"query getProjectGitlabStatus($taskId: ID!) { student { getGitlabLinksWithStatus(taskId: $taskId) { id sshLink httpsLink readyToUse restartsCounter __typename } __typename } } ",
+			"query getProjectGitlabStatus($taskId: ID!) {\n  student {\n    getGitlabLinksWithStatus(taskId: $taskId) {\n      id\n      sshLink\n      httpsLink\n      readyToUse\n      restartsCounter\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -3185,7 +3185,7 @@ export namespace Api {
 
 	export namespace CalendarGetModule {
 		export const request = createGqlQueryRequest(
-			"query calendarGetModule($moduleId: ID!) { student { getModuleById(goalId: $moduleId) { id moduleTitle subjectTitle goalExecutionType trajectory { ...CalendarModuleTrajectory __typename } currentTask { id task { id assignmentType __typename } __typename } __typename } __typename } } fragment CalendarModuleTrajectory on PersonalTrajectory { id levels { id goalElements { id points { id studentTask { ...CalendarStudentTask __typename } __typename } __typename } __typename } __typename } fragment CalendarStudentTask on StudentTask { id taskId task { id studentTaskAdditionalAttributes { ...CalendarStudentTaskAdditionalAttributes __typename } __typename } lastAnswer { id __typename } __typename } fragment CalendarStudentTaskAdditionalAttributes on StudentTaskAdditionalAttributes { cookiesCount __typename } ",
+			"query calendarGetModule($moduleId: ID!) {\n  student {\n    getModuleById(goalId: $moduleId) {\n      id\n      moduleTitle\n      subjectTitle\n      goalExecutionType\n      trajectory {\n        ...CalendarModuleTrajectory\n        __typename\n      }\n      currentTask {\n        id\n        task {\n          id\n          assignmentType\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CalendarModuleTrajectory on PersonalTrajectory {\n  id\n  levels {\n    id\n    goalElements {\n      id\n      points {\n        id\n        studentTask {\n          ...CalendarStudentTask\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment CalendarStudentTask on StudentTask {\n  id\n  taskId\n  task {\n    id\n    studentTaskAdditionalAttributes {\n      ...CalendarStudentTaskAdditionalAttributes\n      __typename\n    }\n    __typename\n  }\n  lastAnswer {\n    id\n    __typename\n  }\n  __typename\n}\n\nfragment CalendarStudentTaskAdditionalAttributes on StudentTaskAdditionalAttributes {\n  cookiesCount\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -3282,7 +3282,7 @@ export namespace Api {
 
 	export namespace CalendarGetNameLessStudentTimeslotsForReview {
 		export const request = createGqlQueryRequest(
-			"query calendarGetNameLessStudentTimeslotsForReview($from: DateTime!, $taskId: ID!, $to: DateTime!) { student { getNameLessStudentTimeslotsForReview(from: $from, taskId: $taskId, to: $to) { checkDuration projectReviewsInfo { ...ProjectReviewsInfo __typename } timeSlots { ...CalendarNameLessTimeslot __typename } __typename } __typename } } fragment ProjectReviewsInfo on ProjectReviewsInfo { reviewByStudentCount relevantReviewByStudentsCount reviewByInspectionStaffCount relevantReviewByInspectionStaffCount __typename } fragment CalendarNameLessTimeslot on CalendarNamelessTimeSlot { start end validStartTimes staffSlot __typename } ",
+			"query calendarGetNameLessStudentTimeslotsForReview($from: DateTime!, $taskId: ID!, $to: DateTime!) {\n  student {\n    getNameLessStudentTimeslotsForReview(from: $from, taskId: $taskId, to: $to) {\n      checkDuration\n      projectReviewsInfo {\n        ...ProjectReviewsInfo\n        __typename\n      }\n      timeSlots {\n        ...CalendarNameLessTimeslot\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment ProjectReviewsInfo on ProjectReviewsInfo {\n  reviewByStudentCount\n  relevantReviewByStudentsCount\n  reviewByInspectionStaffCount\n  relevantReviewByInspectionStaffCount\n  __typename\n}\n\nfragment CalendarNameLessTimeslot on CalendarNamelessTimeSlot {\n  start\n  end\n  validStartTimes\n  staffSlot\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -3334,7 +3334,7 @@ export namespace Api {
 
 	export namespace BonusesGetBadgesWithFakePublicProfile {
 		export const request = createGqlQueryRequest(
-			"query bonusesGetBadgesWithFakePublicProfile($userId: UUID) { student { getBadgesWithFakePublicProfile(userId: $userId) { ...UserAchievements __typename } __typename } } fragment UserAchievements on UserBadgeAward { id histories { id rewardDate awardPoints __typename } badge { id kind { id name order __typename } name description avatarUrl bigAvatarUrl __typename } award { id awardCondition { id description __typename } awardBounties { awardBountyId description cookies coins experienceValue coalitionPoints softSkillPowers { softSkillId power softSkill { id name __typename } __typename } __typename } __typename } points isFake __typename } ",
+			"query bonusesGetBadgesWithFakePublicProfile($userId: UUID) {\n  student {\n    getBadgesWithFakePublicProfile(userId: $userId) {\n      ...UserAchievements\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment UserAchievements on UserBadgeAward {\n  id\n  histories {\n    id\n    rewardDate\n    awardPoints\n    __typename\n  }\n  badge {\n    id\n    kind {\n      id\n      name\n      order\n      __typename\n    }\n    name\n    description\n    avatarUrl\n    bigAvatarUrl\n    __typename\n  }\n  award {\n    id\n    awardCondition {\n      id\n      description\n      __typename\n    }\n    awardBounties {\n      awardBountyId\n      description\n      cookies\n      coins\n      experienceValue\n      coalitionPoints\n      softSkillPowers {\n        softSkillId\n        power\n        softSkill {\n          id\n          name\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  points\n  isFake\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -3432,7 +3432,7 @@ export namespace Api {
 
 	export namespace GetCampusCurrentUser {
 		export const request = createGqlQueryRequest(
-			"query getCampusCurrentUser { user { getCurrentUser { id login __typename } __typename } } ",
+			"query getCampusCurrentUser {\n  user {\n    getCurrentUser {\n      id\n      login\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -3463,7 +3463,7 @@ export namespace Api {
 
 	export namespace GetCampusWorkstation {
 		export const request = createGqlQueryRequest(
-			"query getCampusWorkstation($login: String!) { student { getWorkstationByLogin(login: $login) { id classroomId hostName workstationRow workstationNumber __typename } __typename } } ",
+			"query getCampusWorkstation($login: String!) {\n  student {\n    getWorkstationByLogin(login: $login) {\n      id\n      classroomId\n      hostName\n      workstationRow\n      workstationNumber\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -3490,7 +3490,7 @@ export namespace Api {
 
 	export namespace GetCampusBuildings {
 		export const request = createGqlQueryRequest(
-			"query getCampusBuildings { student { getBuildings { id name classrooms { id number capacity availableCapacity floor classroomPlan { classroomPlanId planMeta __typename } specializations __typename } __typename } __typename } } ",
+			"query getCampusBuildings {\n  student {\n    getBuildings {\n      id\n      name\n      classrooms {\n        id\n        number\n        capacity\n        availableCapacity\n        floor\n        classroomPlan {\n          classroomPlanId\n          planMeta\n          __typename\n        }\n        specializations\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -3539,7 +3539,7 @@ export namespace Api {
 
 	export namespace GetCampusPlanOccupied {
 		export const request = createGqlQueryRequest(
-			"query getCampusPlanOccupied($clusterId: ID!) { student { getClusterPlanStudentsByClusterId(clusterId: $clusterId) { occupiedPlaces { row number stageGroupName stageName user { id login avatarUrl __typename } experience { id value level { id range { id levelCode leftBorder rightBorder __typename } __typename } __typename } studentType __typename } __typename } __typename } } ",
+			"query getCampusPlanOccupied($clusterId: ID!) {\n  student {\n    getClusterPlanStudentsByClusterId(clusterId: $clusterId) {\n      occupiedPlaces {\n        row\n        number\n        stageGroupName\n        stageName\n        user {\n          id\n          login\n          avatarUrl\n          __typename\n        }\n        experience {\n          id\n          value\n          level {\n            id\n            range {\n              id\n              levelCode\n              leftBorder\n              rightBorder\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        studentType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -3610,7 +3610,7 @@ export namespace Api {
 
 	export namespace CalendarAddEvent {
 		export const request = createGqlQueryRequest(
-			"mutation calendarAddEvent($start: DateTime!, $end: DateTime!) { student { addEventToTimetable(start: $start, end: $end) { ...CalendarEvent __typename } __typename } } fragment CalendarEvent on CalendarEvent { id start end description eventType eventCode eventSlots { id type start end __typename } bookings { ...CalendarReviewBooking __typename } exam { ...CalendarEventExam __typename } studentCodeReview { studentGoalId __typename } activity { ...CalendarEventActivity studentFeedback { id rating comment __typename } status activityType isMandatory isWaitListActive isVisible comments { type createTs comment __typename } organizers { id login __typename } __typename } goals { goalId goalName __typename } penalty { ...Penalty __typename } __typename } fragment CalendarReviewBooking on CalendarBooking { id answerId eventSlotId task { id goalId goalName studentTaskAdditionalAttributes { cookiesCount __typename } assignmentType __typename } eventSlot { id start end event { eventUserRole __typename } __typename } verifierUser { ...CalendarReviewUser __typename } verifiableStudent { id user { ...CalendarReviewUser __typename } __typename } bookingStatus team { ...ProjectTeamMembers __typename } isOnline vcLinkUrl __typename } fragment CalendarReviewUser on User { id login __typename } fragment ProjectTeamMembers on ProjectTeamMembers { id teamLead { ...ProjectTeamMember __typename } members { ...ProjectTeamMember __typename } invitedUsers { ...ProjectTeamMember __typename } teamName teamStatus minTeamMemberCount maxTeamMemberCount __typename } fragment ProjectTeamMember on User { id avatarUrl login userExperience { level { id range { levelCode __typename } __typename } cookiesCount codeReviewPoints __typename } __typename } fragment CalendarEventExam on Exam { examId eventId beginDate endDate name location currentStudentsCount maxStudentCount updateDate goalId goalName isWaitListActive isInWaitList stopRegisterDate __typename } fragment CalendarEventActivity on ActivityEvent { activityEventId eventId name beginDate endDate isRegistered description currentStudentsCount maxStudentCount location updateDate isWaitListActive isInWaitList stopRegisterDate __typename } fragment Penalty on Penalty { comment id duration status startTime createTime penaltySlot { currentStudentsCount description duration startTime id endTime __typename } reasonId __typename } ",
+			"mutation calendarAddEvent($start: DateTime!, $end: DateTime!) {\n  student {\n    addEventToTimetable(start: $start, end: $end) {\n      ...CalendarEvent\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CalendarEvent on CalendarEvent {\n  id\n  start\n  end\n  description\n  eventType\n  eventCode\n  eventSlots {\n    id\n    type\n    start\n    end\n    __typename\n  }\n  bookings {\n    ...CalendarReviewBooking\n    __typename\n  }\n  exam {\n    ...CalendarEventExam\n    __typename\n  }\n  studentCodeReview {\n    studentGoalId\n    __typename\n  }\n  activity {\n    ...CalendarEventActivity\n    studentFeedback {\n      id\n      rating\n      comment\n      __typename\n    }\n    status\n    activityType\n    isMandatory\n    isWaitListActive\n    isVisible\n    comments {\n      type\n      createTs\n      comment\n      __typename\n    }\n    organizers {\n      id\n      login\n      __typename\n    }\n    __typename\n  }\n  goals {\n    goalId\n    goalName\n    __typename\n  }\n  penalty {\n    ...Penalty\n    __typename\n  }\n  __typename\n}\n\nfragment CalendarReviewBooking on CalendarBooking {\n  id\n  answerId\n  eventSlotId\n  task {\n    id\n    goalId\n    goalName\n    studentTaskAdditionalAttributes {\n      cookiesCount\n      __typename\n    }\n    assignmentType\n    __typename\n  }\n  eventSlot {\n    id\n    start\n    end\n    event {\n      eventUserRole\n      __typename\n    }\n    __typename\n  }\n  verifierUser {\n    ...CalendarReviewUser\n    __typename\n  }\n  verifiableStudent {\n    id\n    user {\n      ...CalendarReviewUser\n      __typename\n    }\n    __typename\n  }\n  bookingStatus\n  team {\n    ...ProjectTeamMembers\n    __typename\n  }\n  isOnline\n  vcLinkUrl\n  __typename\n}\n\nfragment CalendarReviewUser on User {\n  id\n  login\n  __typename\n}\n\nfragment ProjectTeamMembers on ProjectTeamMembers {\n  id\n  teamLead {\n    ...ProjectTeamMember\n    __typename\n  }\n  members {\n    ...ProjectTeamMember\n    __typename\n  }\n  invitedUsers {\n    ...ProjectTeamMember\n    __typename\n  }\n  teamName\n  teamStatus\n  minTeamMemberCount\n  maxTeamMemberCount\n  __typename\n}\n\nfragment ProjectTeamMember on User {\n  id\n  avatarUrl\n  login\n  userExperience {\n    level {\n      id\n      range {\n        levelCode\n        __typename\n      }\n      __typename\n    }\n    cookiesCount\n    codeReviewPoints\n    __typename\n  }\n  __typename\n}\n\nfragment CalendarEventExam on Exam {\n  examId\n  eventId\n  beginDate\n  endDate\n  name\n  location\n  currentStudentsCount\n  maxStudentCount\n  updateDate\n  goalId\n  goalName\n  isWaitListActive\n  isInWaitList\n  stopRegisterDate\n  __typename\n}\n\nfragment CalendarEventActivity on ActivityEvent {\n  activityEventId\n  eventId\n  name\n  beginDate\n  endDate\n  isRegistered\n  description\n  currentStudentsCount\n  maxStudentCount\n  location\n  updateDate\n  isWaitListActive\n  isInWaitList\n  stopRegisterDate\n  __typename\n}\n\nfragment Penalty on Penalty {\n  comment\n  id\n  duration\n  status\n  startTime\n  createTime\n  penaltySlot {\n    currentStudentsCount\n    description\n    duration\n    startTime\n    id\n    endTime\n    __typename\n  }\n  reasonId\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -3663,7 +3663,7 @@ export namespace Api {
 
 	export namespace GetActivityTypes {
 		export const request = createGqlQueryRequest(
-			"query getActivityTypes { school21 { getActivityTypes { id description category __typename } __typename } } ",
+			"query getActivityTypes {\n  school21 {\n    getActivityTypes {\n      id\n      description\n      category\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -3695,7 +3695,7 @@ export namespace Api {
 
 	export namespace GetStageInfo {
 		export const request = createGqlQueryRequest(
-			"query getStageInfo { user { getCurrentUser { id studentRoles { status school { organizationType __typename } stageGroup { classSubjects { stage { name __typename } __typename } name stage isActive __typename } __typename } __typename } getAllStagesTenantAware { id name __typename } __typename } } ",
+			"query getStageInfo {\n  user {\n    getCurrentUser {\n      id\n      studentRoles {\n        status\n        school {\n          organizationType\n          __typename\n        }\n        stageGroup {\n          classSubjects {\n            stage {\n              name\n              __typename\n            }\n            __typename\n          }\n          name\n          stage\n          isActive\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    getAllStagesTenantAware {\n      id\n      name\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -3763,7 +3763,7 @@ export namespace Api {
 
 	export namespace GetUsers {
 		export const request = createGqlQueryRequest(
-			"query getUsers($userIds: [UUID!]!) { school21 { getUsers(userIds: $userIds) { userId login firstName middleName lastName avatarUrl level __typename } __typename } } ",
+			"query getUsers($userIds: [UUID!]!) {\n  school21 {\n    getUsers(userIds: $userIds) {\n      userId\n      login\n      firstName\n      middleName\n      lastName\n      avatarUrl\n      level\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -3801,7 +3801,7 @@ export namespace Api {
 
 	export namespace GetMySuggestedActivities {
 		export const request = createGqlQueryRequest(
-			"query getMySuggestedActivities($page: PagingInput!, $statuses: [ParticipantEventStatus]) { school21 { getMySuggestedActivities(page: $page, statuses: $statuses) { id start end eventType description eventCode activity { organizers { id login __typename } eventCreator { id login __typename } comments { type createTs comment __typename } averageFeedbackRating isVisible activityType status activityEventId eventId name description location currentStudentsCount maxStudentCount isRegistered isInWaitList isWaitListActive stopRegisterDate beginDate endDate __typename } __typename } __typename } } ",
+			"query getMySuggestedActivities($page: PagingInput!, $statuses: [ParticipantEventStatus]) {\n  school21 {\n    getMySuggestedActivities(page: $page, statuses: $statuses) {\n      id\n      start\n      end\n      eventType\n      description\n      eventCode\n      activity {\n        organizers {\n          id\n          login\n          __typename\n        }\n        eventCreator {\n          id\n          login\n          __typename\n        }\n        comments {\n          type\n          createTs\n          comment\n          __typename\n        }\n        averageFeedbackRating\n        isVisible\n        activityType\n        status\n        activityEventId\n        eventId\n        name\n        description\n        location\n        currentStudentsCount\n        maxStudentCount\n        isRegistered\n        isInWaitList\n        isWaitListActive\n        stopRegisterDate\n        beginDate\n        endDate\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -3833,7 +3833,7 @@ export namespace Api {
 
 	export namespace SubscribeToEvent {
 		export const request = createGqlQueryRequest(
-			"mutation subscribeToEvent($eventId: ID!) { student { subscribeToEvent(eventId: $eventId) { ...UpcomingEvent __typename } __typename } } fragment UpcomingEvent on CalendarEvent { id start end bookings { id task { id goalName __typename } __typename } eventSlots { id eventId type start end __typename } maxStudentCount location ipRange eventType eventCode description externalId currentStudentsCount exam { examId eventId beginDate endDate location ip maxStudentCount isVisible name goalId isWaitListActive isInWaitList currentStudentsCount createDate updateDate schoolId stopRegisterDate isRegistered goalName eventType registrationAccessStatus __typename } studentCodeReview { studentGoalId __typename } activity { activityEventId eventId beginDate endDate location description maxStudentCount isVisible name isWaitListActive isInWaitList currentStudentsCount createDate updateDate schoolId stopRegisterDate isRegistered activityType eventType isMandatory status organizers { id login __typename } __typename } penalty { ...Penalty __typename } __typename } fragment Penalty on Penalty { comment id duration status startTime createTime penaltySlot { currentStudentsCount description duration startTime id endTime __typename } reasonId __typename } ",
+			"mutation subscribeToEvent($eventId: ID!) {\n  student {\n    subscribeToEvent(eventId: $eventId) {\n      ...UpcomingEvent\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment UpcomingEvent on CalendarEvent {\n  id\n  start\n  end\n  bookings {\n    id\n    task {\n      id\n      goalName\n      __typename\n    }\n    __typename\n  }\n  eventSlots {\n    id\n    eventId\n    type\n    start\n    end\n    __typename\n  }\n  maxStudentCount\n  location\n  ipRange\n  eventType\n  eventCode\n  description\n  externalId\n  currentStudentsCount\n  exam {\n    examId\n    eventId\n    beginDate\n    endDate\n    location\n    ip\n    maxStudentCount\n    isVisible\n    name\n    goalId\n    isWaitListActive\n    isInWaitList\n    currentStudentsCount\n    createDate\n    updateDate\n    schoolId\n    stopRegisterDate\n    isRegistered\n    goalName\n    eventType\n    registrationAccessStatus\n    __typename\n  }\n  studentCodeReview {\n    studentGoalId\n    __typename\n  }\n  activity {\n    activityEventId\n    eventId\n    beginDate\n    endDate\n    location\n    description\n    maxStudentCount\n    isVisible\n    name\n    isWaitListActive\n    isInWaitList\n    currentStudentsCount\n    createDate\n    updateDate\n    schoolId\n    stopRegisterDate\n    isRegistered\n    activityType\n    eventType\n    isMandatory\n    status\n    organizers {\n      id\n      login\n      __typename\n    }\n    __typename\n  }\n  penalty {\n    ...Penalty\n    __typename\n  }\n  __typename\n}\n\nfragment Penalty on Penalty {\n  comment\n  id\n  duration\n  status\n  startTime\n  createTime\n  penaltySlot {\n    currentStudentsCount\n    description\n    duration\n    startTime\n    id\n    endTime\n    __typename\n  }\n  reasonId\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -3913,7 +3913,7 @@ export namespace Api {
 
 	export namespace UnsubscribeFromEvent {
 		export const request = createGqlQueryRequest(
-			"mutation unsubscribeFromEvent($eventId: ID!) { student { unsubscribeFromEvent(eventId: $eventId) { ...UpcomingEvent __typename } __typename } } fragment UpcomingEvent on CalendarEvent { id start end bookings { id task { id goalName __typename } __typename } eventSlots { id eventId type start end __typename } maxStudentCount location ipRange eventType eventCode description externalId currentStudentsCount exam { examId eventId beginDate endDate location ip maxStudentCount isVisible name goalId isWaitListActive isInWaitList currentStudentsCount createDate updateDate schoolId stopRegisterDate isRegistered goalName eventType registrationAccessStatus __typename } studentCodeReview { studentGoalId __typename } activity { activityEventId eventId beginDate endDate location description maxStudentCount isVisible name isWaitListActive isInWaitList currentStudentsCount createDate updateDate schoolId stopRegisterDate isRegistered activityType eventType isMandatory status organizers { id login __typename } __typename } penalty { ...Penalty __typename } __typename } fragment Penalty on Penalty { comment id duration status startTime createTime penaltySlot { currentStudentsCount description duration startTime id endTime __typename } reasonId __typename } ",
+			"mutation unsubscribeFromEvent($eventId: ID!) {\n  student {\n    unsubscribeFromEvent(eventId: $eventId) {\n      ...UpcomingEvent\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment UpcomingEvent on CalendarEvent {\n  id\n  start\n  end\n  bookings {\n    id\n    task {\n      id\n      goalName\n      __typename\n    }\n    __typename\n  }\n  eventSlots {\n    id\n    eventId\n    type\n    start\n    end\n    __typename\n  }\n  maxStudentCount\n  location\n  ipRange\n  eventType\n  eventCode\n  description\n  externalId\n  currentStudentsCount\n  exam {\n    examId\n    eventId\n    beginDate\n    endDate\n    location\n    ip\n    maxStudentCount\n    isVisible\n    name\n    goalId\n    isWaitListActive\n    isInWaitList\n    currentStudentsCount\n    createDate\n    updateDate\n    schoolId\n    stopRegisterDate\n    isRegistered\n    goalName\n    eventType\n    registrationAccessStatus\n    __typename\n  }\n  studentCodeReview {\n    studentGoalId\n    __typename\n  }\n  activity {\n    activityEventId\n    eventId\n    beginDate\n    endDate\n    location\n    description\n    maxStudentCount\n    isVisible\n    name\n    isWaitListActive\n    isInWaitList\n    currentStudentsCount\n    createDate\n    updateDate\n    schoolId\n    stopRegisterDate\n    isRegistered\n    activityType\n    eventType\n    isMandatory\n    status\n    organizers {\n      id\n      login\n      __typename\n    }\n    __typename\n  }\n  penalty {\n    ...Penalty\n    __typename\n  }\n  __typename\n}\n\nfragment Penalty on Penalty {\n  comment\n  id\n  duration\n  status\n  startTime\n  createTime\n  penaltySlot {\n    currentStudentsCount\n    description\n    duration\n    startTime\n    id\n    endTime\n    __typename\n  }\n  reasonId\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -3993,7 +3993,7 @@ export namespace Api {
 
 	export namespace PublicProfileGetProjects {
 		export const request = createGqlQueryRequest(
-			"query publicProfileGetProjects($studentId: UUID!, $stageGroupId: ID!) { school21 { getStudentProjectsForPublicProfileByStageGroup( studentId: $studentId stageGroupId: $stageGroupId ) { groupName name experience finalPercentage goalId goalStatus amountAnswers amountReviewedAnswers __typename } __typename } } ",
+			"query publicProfileGetProjects($studentId: UUID!, $stageGroupId: ID!) {\n  school21 {\n    getStudentProjectsForPublicProfileByStageGroup(\n      studentId: $studentId\n      stageGroupId: $stageGroupId\n    ) {\n      groupName\n      name\n      experience\n      finalPercentage\n      goalId\n      goalStatus\n      amountAnswers\n      amountReviewedAnswers\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -4033,7 +4033,7 @@ export namespace Api {
 
 	export namespace PublicProfileGetCredentialsByLogin {
 		export const request = createGqlQueryRequest(
-			"query publicProfileGetCredentialsByLogin($login: String!) { school21 { getStudentByLogin(login: $login) { studentId userId schoolId isActive isGraduate __typename } __typename } } ",
+			"query publicProfileGetCredentialsByLogin($login: String!) {\n  school21 {\n    getStudentByLogin(login: $login) {\n      studentId\n      userId\n      schoolId\n      isActive\n      isGraduate\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -4069,7 +4069,7 @@ export namespace Api {
 
 	export namespace BonusesGetUserIdByLogin {
 		export const request = createGqlQueryRequest(
-			"query bonusesGetUserIdByLogin($login: String!) { student { getUserIdByLogin(login: $login) __typename } } ",
+			"query bonusesGetUserIdByLogin($login: String!) {\n  student {\n    getUserIdByLogin(login: $login)\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -4096,7 +4096,7 @@ export namespace Api {
 
 	export namespace CompetitionCoalitionGetUserTournament {
 		export const request = createGqlQueryRequest(
-			"query competitionCoalitionGetUserTournament { student { getUserTournamentWidget { coalitionMember { coalition { ...CompetitionCurrentCoalition __typename } __typename } lastTournamentResult { id __typename } __typename } __typename } } fragment CompetitionCurrentCoalition on GameCoalition { id name avatarUrl backgroundUrl backgroundUrlBig memberCount color currentTournament { points tournament { name timeStart timeEnd __typename } __typename } masterUser { login avatarUrl __typename } __typename } ",
+			"query competitionCoalitionGetUserTournament {\n  student {\n    getUserTournamentWidget {\n      coalitionMember {\n        coalition {\n          ...CompetitionCurrentCoalition\n          __typename\n        }\n        __typename\n      }\n      lastTournamentResult {\n        id\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CompetitionCurrentCoalition on GameCoalition {\n  id\n  name\n  avatarUrl\n  backgroundUrl\n  backgroundUrlBig\n  memberCount\n  color\n  currentTournament {\n    points\n    tournament {\n      name\n      timeStart\n      timeEnd\n      __typename\n    }\n    __typename\n  }\n  masterUser {\n    login\n    avatarUrl\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -4169,7 +4169,7 @@ export namespace Api {
 
 	export namespace CompetitionCoalitionGetMyCoalitionMembers {
 		export const request = createGqlQueryRequest(
-			"query competitionCoalitionGetMyCoalitionMembers($page: PagingInput) { student { getUserTournamentWidget { getMyCoalitionMembers(page: $page) { user { id login avatarUrl userExperience { level { id levelCode __typename } __typename } __typename } __typename } __typename } __typename } } ",
+			"query competitionCoalitionGetMyCoalitionMembers($page: PagingInput) {\n  student {\n    getUserTournamentWidget {\n      getMyCoalitionMembers(page: $page) {\n        user {\n          id\n          login\n          avatarUrl\n          userExperience {\n            level {\n              id\n              levelCode\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -4230,7 +4230,7 @@ export namespace Api {
 
 	export namespace GetPenaltyList {
 		export const request = createGqlQueryRequest(
-			"query getPenaltyList($statuses: [String]!, $from: DateTime, $to: DateTime, $sorting: SortingField, $page: PagingInput!) { school21 { getMyPenalties( statuses: $statuses from: $from to: $to sorting: $sorting page: $page ) { ...Penalty __typename } getPenaltyReasons { id name __typename } countMyPenalties(statuses: $statuses) __typename } } fragment Penalty on Penalty { comment id duration status startTime createTime penaltySlot { currentStudentsCount description duration startTime id endTime __typename } reasonId __typename } ",
+			"query getPenaltyList($statuses: [String]!, $from: DateTime, $to: DateTime, $sorting: SortingField, $page: PagingInput!) {\n  school21 {\n    getMyPenalties(\n      statuses: $statuses\n      from: $from\n      to: $to\n      sorting: $sorting\n      page: $page\n    ) {\n      ...Penalty\n      __typename\n    }\n    getPenaltyReasons {\n      id\n      name\n      __typename\n    }\n    countMyPenalties(statuses: $statuses)\n    __typename\n  }\n}\n\nfragment Penalty on Penalty {\n  comment\n  id\n  duration\n  status\n  startTime\n  createTime\n  penaltySlot {\n    currentStudentsCount\n    description\n    duration\n    startTime\n    id\n    endTime\n    __typename\n  }\n  reasonId\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -4271,7 +4271,7 @@ export namespace Api {
 
 	export namespace GetPenaltiesCount {
 		export const request = createGqlQueryRequest(
-			"query getPenaltiesCount($statuses: [String]!) { school21 { countMyPenalties(statuses: $statuses) __typename } } ",
+			"query getPenaltiesCount($statuses: [String]!) {\n  school21 {\n    countMyPenalties(statuses: $statuses)\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -4298,7 +4298,7 @@ export namespace Api {
 
 	export namespace GetGraphCurrentType {
 		export const request = createGqlQueryRequest(
-			"query getGraphCurrentType($userId: ID!, $schoolId: ID!) { student { getStudentCurrentStageWithGraphType(userId: $userId, schoolId: $schoolId) { id graphType __typename } __typename } } ",
+			"query getGraphCurrentType($userId: ID!, $schoolId: ID!) {\n  student {\n    getStudentCurrentStageWithGraphType(userId: $userId, schoolId: $schoolId) {\n      id\n      graphType\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -4332,7 +4332,7 @@ export namespace Api {
 
 	export namespace GetGraphBasisGoals {
 		export const request = createGqlQueryRequest(
-			"query getGraphBasisGoals($studentId: UUID!) { student { getBasisGraph(studentId: $studentId) { isIntensiveGraphAvailable graphNodes { ...BasisGraphNode __typename } __typename } __typename } } fragment BasisGraphNode on GraphNode { graphNodeId nodeCode studyDirections { id name color textColor __typename } entityType entityId goal { goalExecutionType projectState projectName projectDescription projectPoints projectDate duration isMandatory __typename } course { courseType projectState projectName projectDescription projectPoints projectDate duration localCourseId __typename } parentNodeCodes __typename } ",
+			"query getGraphBasisGoals($studentId: UUID!) {\n  student {\n    getBasisGraph(studentId: $studentId) {\n      isIntensiveGraphAvailable\n      graphNodes {\n        ...BasisGraphNode\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment BasisGraphNode on GraphNode {\n  graphNodeId\n  nodeCode\n  studyDirections {\n    id\n    name\n    color\n    textColor\n    __typename\n  }\n  entityType\n  entityId\n  goal {\n    goalExecutionType\n    projectState\n    projectName\n    projectDescription\n    projectPoints\n    projectDate\n    duration\n    isMandatory\n    __typename\n  }\n  course {\n    courseType\n    projectState\n    projectName\n    projectDescription\n    projectPoints\n    projectDate\n    duration\n    localCourseId\n    __typename\n  }\n  parentNodeCodes\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -4399,7 +4399,7 @@ export namespace Api {
 
 	export namespace GetTasks {
 		export const request = createGqlQueryRequest(
-			"query getTasks($ids: [ID!]!) { student { getTasksByIds(ids: $ids) { ...StudentTaskInProject __typename } __typename } } fragment StudentTaskInProject on StudentTask { id task { id content { id body __typename } __typename } __typename } ",
+			"query getTasks($ids: [ID!]!) {\n  student {\n    getTasksByIds(ids: $ids) {\n      ...StudentTaskInProject\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment StudentTaskInProject on StudentTask {\n  id\n  task {\n    id\n    content {\n      id\n      body\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -4444,7 +4444,7 @@ export namespace Api {
 
 	export namespace GetGitlabLink {
 		export const request = createGqlQueryRequest(
-			"query getGitlabLink($taskId: ID!) { student { getLinkToPrivateStudentGitlabProjectByTaskId(taskId: $taskId) { sshLink hasOpenedMR httpsLink __typename } __typename } } ",
+			"query getGitlabLink($taskId: ID!) {\n  student {\n    getLinkToPrivateStudentGitlabProjectByTaskId(taskId: $taskId) {\n      sshLink\n      hasOpenedMR\n      httpsLink\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -4478,7 +4478,7 @@ export namespace Api {
 
 	export namespace CreateFeedbackOnEvaluation {
 		export const request = createGqlQueryRequest(
-			"mutation createFeedbackOnEvaluation($reviewFeedbackInput: ReviewFeedbackInput!) { student { createReviewFeedback(reviewFeedbackInput: $reviewFeedbackInput) { ...EvaluationFeedback __typename } __typename } } fragment EvaluationFeedback on ReviewFeedback { id comment filledChecklist { id __typename } reviewFeedbackCategoryValues { feedbackCategory feedbackValue id __typename } __typename } ",
+			"mutation createFeedbackOnEvaluation($reviewFeedbackInput: ReviewFeedbackInput!) {\n  student {\n    createReviewFeedback(reviewFeedbackInput: $reviewFeedbackInput) {\n      ...EvaluationFeedback\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment EvaluationFeedback on ReviewFeedback {\n  id\n  comment\n  filledChecklist {\n    id\n    __typename\n  }\n  reviewFeedbackCategoryValues {\n    feedbackCategory\n    feedbackValue\n    id\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -4536,7 +4536,7 @@ export namespace Api {
 
 	export namespace GetProjectTeamWithMembers {
 		export const request = createGqlQueryRequest(
-			"query getProjectTeamWithMembers($goalId: ID!) { student { getProjectTeamWithMembers(goalId: $goalId) { ...TeamWithMembers __typename } __typename } } fragment TeamWithMembers on ProjectTeamWithMembers { teamWithMembers { team { id name status minTeamMemberCount maxTeamMemberCount __typename } members { ...TeamMemberWithRole __typename } __typename } invitedStudents { student { user { ...ProjectTeamMember __typename } __typename } __typename } __typename } fragment TeamMemberWithRole on TeamMember { role user { ...ProjectTeamMember __typename } __typename } fragment ProjectTeamMember on User { id avatarUrl login userExperience { level { id range { levelCode __typename } __typename } cookiesCount codeReviewPoints __typename } __typename } ",
+			"query getProjectTeamWithMembers($goalId: ID!) {\n  student {\n    getProjectTeamWithMembers(goalId: $goalId) {\n      ...TeamWithMembers\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment TeamWithMembers on ProjectTeamWithMembers {\n  teamWithMembers {\n    team {\n      id\n      name\n      status\n      minTeamMemberCount\n      maxTeamMemberCount\n      __typename\n    }\n    members {\n      ...TeamMemberWithRole\n      __typename\n    }\n    __typename\n  }\n  invitedStudents {\n    student {\n      user {\n        ...ProjectTeamMember\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment TeamMemberWithRole on TeamMember {\n  role\n  user {\n    ...ProjectTeamMember\n    __typename\n  }\n  __typename\n}\n\nfragment ProjectTeamMember on User {\n  id\n  avatarUrl\n  login\n  userExperience {\n    level {\n      id\n      range {\n        levelCode\n        __typename\n      }\n      __typename\n    }\n    cookiesCount\n    codeReviewPoints\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -4626,7 +4626,7 @@ export namespace Api {
 
 	export namespace GetIsDisbandRequestAlreadySent {
 		export const request = createGqlQueryRequest(
-			"query getIsDisbandRequestAlreadySent($teamId: UUID!) { student { isRequestBeenSentToTeamDisband(teamId: $teamId) __typename } } ",
+			"query getIsDisbandRequestAlreadySent($teamId: UUID!) {\n  student {\n    isRequestBeenSentToTeamDisband(teamId: $teamId)\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -4653,7 +4653,7 @@ export namespace Api {
 
 	export namespace GetGitlabSettingsToken {
 		export const request = createGqlQueryRequest(
-			"query getGitlabSettingsToken($taskId: ID!) { student { getLinkToPrivateStudentGitlabProjectByTaskId(taskId: $taskId) { runnersToken __typename } __typename } } ",
+			"query getGitlabSettingsToken($taskId: ID!) {\n  student {\n    getLinkToPrivateStudentGitlabProjectByTaskId(taskId: $taskId) {\n      runnersToken\n      __typename\n    }\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -4675,7 +4675,7 @@ export namespace Api {
 
 	export namespace CancelInvitation {
 		export const request = createGqlQueryRequest(
-			"mutation cancelInvitation($teamId: UUID!, $userId: ID!) { student { cancelInvitation(teamId: $teamId, userId: $userId) { ...StudentInvitationInfo __typename } __typename } } fragment StudentInvitationInfo on StudentInvitationInfo { student { ...AvailableStudentForTeam __typename } invitationStatus __typename } fragment AvailableStudentForTeam on Student { id user { id login avatarUrl userExperience { ...CurrentUserExperience __typename } __typename } __typename } fragment CurrentUserExperience on UserExperience { id cookiesCount codeReviewPoints coinsCount level { id range { id levelCode __typename } __typename } __typename } ",
+			"mutation cancelInvitation($teamId: UUID!, $userId: ID!) {\n  student {\n    cancelInvitation(teamId: $teamId, userId: $userId) {\n      ...StudentInvitationInfo\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment StudentInvitationInfo on StudentInvitationInfo {\n  student {\n    ...AvailableStudentForTeam\n    __typename\n  }\n  invitationStatus\n  __typename\n}\n\nfragment AvailableStudentForTeam on Student {\n  id\n  user {\n    id\n    login\n    avatarUrl\n    userExperience {\n      ...CurrentUserExperience\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment CurrentUserExperience on UserExperience {\n  id\n  cookiesCount\n  codeReviewPoints\n  coinsCount\n  level {\n    id\n    range {\n      id\n      levelCode\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -4744,7 +4744,7 @@ export namespace Api {
 
 	export namespace GetAvailableStudentsForTeams {
 		export const request = createGqlQueryRequest(
-			"query getAvailableStudentsForTeams($goalId: ID!) { student { getAvailableStudentsForTeam(goalId: $goalId) { ...StudentInvitationInfo __typename } __typename } } fragment StudentInvitationInfo on StudentInvitationInfo { student { ...AvailableStudentForTeam __typename } invitationStatus __typename } fragment AvailableStudentForTeam on Student { id user { id login avatarUrl userExperience { ...CurrentUserExperience __typename } __typename } __typename } fragment CurrentUserExperience on UserExperience { id cookiesCount codeReviewPoints coinsCount level { id range { id levelCode __typename } __typename } __typename } ",
+			"query getAvailableStudentsForTeams($goalId: ID!) {\n  student {\n    getAvailableStudentsForTeam(goalId: $goalId) {\n      ...StudentInvitationInfo\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment StudentInvitationInfo on StudentInvitationInfo {\n  student {\n    ...AvailableStudentForTeam\n    __typename\n  }\n  invitationStatus\n  __typename\n}\n\nfragment AvailableStudentForTeam on Student {\n  id\n  user {\n    id\n    login\n    avatarUrl\n    userExperience {\n      ...CurrentUserExperience\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment CurrentUserExperience on UserExperience {\n  id\n  cookiesCount\n  codeReviewPoints\n  coinsCount\n  level {\n    id\n    range {\n      id\n      levelCode\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -4812,7 +4812,7 @@ export namespace Api {
 
 	export namespace SendInvitation {
 		export const request = createGqlQueryRequest(
-			"mutation sendInvitation($teamId: UUID!, $userId: ID!) { student { sendInvitation(teamId: $teamId, userId: $userId) { ...StudentInvitationInfo __typename } __typename } } fragment StudentInvitationInfo on StudentInvitationInfo { student { ...AvailableStudentForTeam __typename } invitationStatus __typename } fragment AvailableStudentForTeam on Student { id user { id login avatarUrl userExperience { ...CurrentUserExperience __typename } __typename } __typename } fragment CurrentUserExperience on UserExperience { id cookiesCount codeReviewPoints coinsCount level { id range { id levelCode __typename } __typename } __typename } ",
+			"mutation sendInvitation($teamId: UUID!, $userId: ID!) {\n  student {\n    sendInvitation(teamId: $teamId, userId: $userId) {\n      ...StudentInvitationInfo\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment StudentInvitationInfo on StudentInvitationInfo {\n  student {\n    ...AvailableStudentForTeam\n    __typename\n  }\n  invitationStatus\n  __typename\n}\n\nfragment AvailableStudentForTeam on Student {\n  id\n  user {\n    id\n    login\n    avatarUrl\n    userExperience {\n      ...CurrentUserExperience\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment CurrentUserExperience on UserExperience {\n  id\n  cookiesCount\n  codeReviewPoints\n  coinsCount\n  level {\n    id\n    range {\n      id\n      levelCode\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
@@ -4881,7 +4881,7 @@ export namespace Api {
 
 	export namespace RemoveP2P {
 		export const request = createGqlQueryRequest(
-			"mutation removeP2P($bookingId: ID!) { student { removeBookingFromEventSlot(bookingId: $bookingId) __typename } } ",
+			"mutation removeP2P($bookingId: ID!) {\n  student {\n    removeBookingFromEventSlot(bookingId: $bookingId)\n    __typename\n  }\n}\n",
 		)
 
 		export namespace Variables {
@@ -4908,7 +4908,7 @@ export namespace Api {
 
 	export namespace CalendarGetExams {
 		export const request = createGqlQueryRequest(
-			"query calendarGetExams($from: DateTime!, $to: DateTime!) { student { getExams(from: $from, to: $to) { ...CalendarExam __typename } __typename } } fragment CalendarExam on Exam { examId eventId beginDate endDate name location maxStudentCount currentStudentsCount updateDate goalId goalName isWaitListActive isInWaitList stopRegisterDate __typename } ",
+			"query calendarGetExams($from: DateTime!, $to: DateTime!) {\n  student {\n    getExams(from: $from, to: $to) {\n      ...CalendarExam\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CalendarExam on Exam {\n  examId\n  eventId\n  beginDate\n  endDate\n  name\n  location\n  maxStudentCount\n  currentStudentsCount\n  updateDate\n  goalId\n  goalName\n  isWaitListActive\n  isInWaitList\n  stopRegisterDate\n  __typename\n}\n",
 		)
 
 		export namespace Variables {
