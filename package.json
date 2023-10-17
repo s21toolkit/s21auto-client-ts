@@ -3,7 +3,7 @@
 	"type": "module",
 	"module": "build/index.js",
 	"types": "build/index.d.ts",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"scripts": {
 		"build": "bun run build.mjs",
 		"prepublishOnly": "bun run build"
