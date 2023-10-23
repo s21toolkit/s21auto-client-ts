@@ -34,9 +34,3 @@ export function createGqlQueryRequest<
 		variables: variables as TVariables,
 	}
 }
-
-export async function extractGqlResponseData<TData>(response: Response) {
-	const body = (await response.json()) as GQLResponse<TData>
-
-	return body.data
-}
