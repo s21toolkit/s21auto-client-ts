@@ -1,21 +1,8 @@
 import { ApiContext } from "@/api"
 import { AuthProvider, getAuthHeaders } from "@/auth/providers/AuthProvider"
 import { S21_GQL_API_URL } from "@/constants"
-import { GQLRequest } from "@/gql"
-
-export class ClientError extends Error {}
-
-export class HttpError extends ClientError {
-	constructor(readonly response: Response) {
-		super(`HTTP Error: [${response.status}] ${response.statusText}`)
-	}
-}
-
-export class GQLError extends ClientError {
-	constructor(readonly errors: unknown[]) {
-		super(`GQL Error`)
-	}
-}
+import { GQLRequest, RawGQLResponse } from "@/gql"
+import { GQLError, HttpError } from "./errors"
 
 export class Client {
 	#authProvider: AuthProvider
@@ -48,9 +35,7 @@ export class Client {
 			throw new HttpError(response)
 		}
 
-		const body = (await response.json()) as
-			| { data: TData }
-			| { errors: unknown[] }
+		const body = (await response.json()) as RawGQLResponse<TData>
 
 		if ("errors" in body) {
 			throw new GQLError(body.errors)

@@ -1,6 +1,7 @@
 import { source } from "common-tags"
 import { S21_GQL_API_URL } from "@/constants"
-import { createGqlQueryRequest, extractGqlResponseData } from "@/gql"
+import { GQLError, HttpError } from "@/errors"
+import { createGqlQueryRequest, RawGQLResponse } from "@/gql"
 import { Token } from "./Token"
 
 export type UserRoleData = {
@@ -107,12 +108,14 @@ export async function fetchUserData(token: Token) {
 	})
 
 	if (!userDataResponse.ok) {
-		throw new Error(
-			`Failed to fetch user data: ${userDataResponse.statusText}`,
-		)
+		throw new HttpError(userDataResponse)
 	}
 
-	const data = await extractGqlResponseData<UserRoleData>(userDataResponse)
+	const body = (await userDataResponse.json()) as RawGQLResponse<UserRoleData>
 
-	return data
+	if ("errors" in body) {
+		throw new GQLError(body.errors)
+	}
+
+	return body.data
 }

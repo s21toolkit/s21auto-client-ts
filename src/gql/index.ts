@@ -4,6 +4,13 @@ export type GQLRequest<TVariables extends Record<string, unknown> = {}> = {
 	variables: TVariables
 }
 
+// TODO: Add types
+export type GQLErrorData = unknown
+
+export type RawGQLResponse<TData = unknown> =
+	| { errors: GQLErrorData[] }
+	| GQLResponse<TData>
+
 export type GQLResponse<TData> = {
 	data: TData
 }
