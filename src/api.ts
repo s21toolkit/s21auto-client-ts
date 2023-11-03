@@ -307,31 +307,6 @@ export namespace Api {
 		export type Data = Data.Data
 	}
 
-	export namespace GetIsHonorRatingNeeded {
-		export const request = createGqlQueryRequest(
-			"query getIsHonorRatingNeeded {\n  student {\n    isHonorRatingNeeded\n    __typename\n  }\n}\n",
-		)
-
-		export namespace Variables {
-			export type Variables = {}
-		}
-
-		export type Variables = Variables.Variables
-
-		export namespace Data {
-			export type Data = {
-				student: Student
-			}
-
-			export type Student = {
-				isHonorRatingNeeded: boolean
-				__typename: string
-			}
-		}
-
-		export type Data = Data.Data
-	}
-
 	export namespace GetSaleProgressPercentages {
 		export const request = createGqlQueryRequest(
 			"query getSaleProgressPercentages {\n  school21 {\n    getSaleProgressPercentages {\n      ...RpSaleInfo\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment RpSaleInfo on RpSaleProgress {\n  rpType\n  progressPercentage\n  __typename\n}\n",
@@ -356,37 +331,6 @@ export namespace Api {
 			export type GetSaleProgressPercentage = {
 				rpType: string
 				progressPercentage: number
-				__typename: string
-			}
-		}
-
-		export type Data = Data.Data
-	}
-
-	export namespace GetSearchHistory {
-		export const request = createGqlQueryRequest(
-			"query getSearchHistory {\n  school21 {\n    getSearchHistoryTooltips {\n      tooltipText\n      tooltipCategory\n      __typename\n    }\n    __typename\n  }\n}\n",
-		)
-
-		export namespace Variables {
-			export type Variables = {}
-		}
-
-		export type Variables = Variables.Variables
-
-		export namespace Data {
-			export type Data = {
-				school21: School21
-			}
-
-			export type School21 = {
-				getSearchHistoryTooltips: GetSearchHistoryTooltip[]
-				__typename: string
-			}
-
-			export type GetSearchHistoryTooltip = {
-				tooltipText: string
-				tooltipCategory: string
 				__typename: string
 			}
 		}
@@ -665,170 +609,6 @@ export namespace Api {
 		export type Data = Data.Data
 	}
 
-	export namespace GetUpcomingEvents {
-		export const request = createGqlQueryRequest(
-			"query getUpcomingEvents($eventCodes: [String!]!, $registrationAccessStatusFilter: RegistartionStatusEnum, $page: PagingInput) {\n  student {\n    getUpcomingEventsForRegistration(\n      eventCodes: $eventCodes\n      registrationAccessStatusFilter: $registrationAccessStatusFilter\n      page: $page\n    ) {\n      ...UpcomingEvent\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment UpcomingEvent on CalendarEvent {\n  id\n  start\n  end\n  bookings {\n    id\n    task {\n      id\n      goalName\n      __typename\n    }\n    __typename\n  }\n  eventSlots {\n    id\n    eventId\n    type\n    start\n    end\n    __typename\n  }\n  maxStudentCount\n  location\n  ipRange\n  eventType\n  eventCode\n  description\n  externalId\n  currentStudentsCount\n  exam {\n    examId\n    eventId\n    beginDate\n    endDate\n    location\n    ip\n    maxStudentCount\n    isVisible\n    name\n    goalId\n    isWaitListActive\n    isInWaitList\n    currentStudentsCount\n    createDate\n    updateDate\n    schoolId\n    stopRegisterDate\n    isRegistered\n    goalName\n    eventType\n    registrationAccessStatus\n    __typename\n  }\n  studentCodeReview {\n    studentGoalId\n    __typename\n  }\n  activity {\n    activityEventId\n    eventId\n    beginDate\n    endDate\n    location\n    description\n    maxStudentCount\n    isVisible\n    name\n    isWaitListActive\n    isInWaitList\n    currentStudentsCount\n    createDate\n    updateDate\n    schoolId\n    stopRegisterDate\n    isRegistered\n    activityType\n    eventType\n    isMandatory\n    status\n    organizers {\n      id\n      login\n      __typename\n    }\n    __typename\n  }\n  penalty {\n    ...Penalty\n    __typename\n  }\n  __typename\n}\n\nfragment Penalty on Penalty {\n  comment\n  id\n  duration\n  status\n  startTime\n  createTime\n  penaltySlot {\n    currentStudentsCount\n    description\n    duration\n    startTime\n    id\n    endTime\n    __typename\n  }\n  reasonId\n  __typename\n}\n",
-		)
-
-		export namespace Variables {
-			export type Variables = {
-				eventCodes: string[]
-				registrationAccessStatusFilter?: string
-				page?: Page
-			}
-
-			export type Page = {
-				limit: number
-				offset: number
-			}
-		}
-
-		export type Variables = Variables.Variables
-
-		export namespace Data {
-			export type Data = {
-				student: Student
-			}
-
-			export type Student = {
-				getUpcomingEventsForRegistration: GetUpcomingEventsForRegistration[]
-				__typename: string
-			}
-
-			export type GetUpcomingEventsForRegistration = {
-				id: string
-				start: Date
-				end: Date
-				bookings: unknown[]
-				eventSlots: unknown[]
-				maxStudentCount: number
-				location: string
-				ipRange: null | string
-				eventType: string
-				eventCode: string
-				description: string
-				externalId: number
-				currentStudentsCount: number
-				exam: Exam | null
-				studentCodeReview: null
-				activity: Activity | null
-				penalty: null
-				__typename: string
-			}
-
-			export type Activity = {
-				activityEventId: string
-				eventId: string
-				beginDate: Date
-				endDate: Date
-				location: string
-				description: string
-				maxStudentCount: number
-				isVisible: boolean
-				name: string
-				isWaitListActive: boolean
-				isInWaitList: boolean
-				currentStudentsCount: number
-				createDate: Date
-				updateDate: Date
-				schoolId: string
-				stopRegisterDate: Date
-				isRegistered: boolean
-				activityType: string
-				eventType: string
-				isMandatory: boolean
-				status: null | string
-				organizers: Organizer[]
-				__typename: string
-			}
-
-			export type Organizer = {
-				id: string
-				login: string
-				__typename: string
-			}
-
-			export type Exam = {
-				examId: string
-				eventId: string
-				beginDate: Date
-				endDate: Date
-				location: string
-				ip: null
-				maxStudentCount: number
-				isVisible: boolean
-				name: string
-				goalId: string
-				isWaitListActive: boolean
-				isInWaitList: boolean
-				currentStudentsCount: number
-				createDate: Date
-				updateDate: Date
-				schoolId: string
-				stopRegisterDate: Date
-				isRegistered: boolean
-				goalName: string
-				eventType: string
-				registrationAccessStatus: string
-				__typename: string
-			}
-		}
-
-		export type Data = Data.Data
-	}
-
-	export namespace GetAgendaEvents {
-		export const request = createGqlQueryRequest(
-			"query getAgendaEvents($from: DateTime!, $to: DateTime!, $limit: Int!) {\n  student {\n    getMyAgendaEvents(from: $from, to: $to, limit: $limit) {\n      agendaItemContext {\n        entityId\n        entityType\n        __typename\n      }\n      start\n      end\n      label\n      description\n      agendaEventType\n      additionalInfo {\n        key\n        value\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
-		)
-
-		export namespace Variables {
-			export type Variables = {
-				from: Date
-				to: Date
-				limit: number
-			}
-		}
-
-		export type Variables = Variables.Variables
-
-		export namespace Data {
-			export type Data = {
-				student: Student
-			}
-
-			export type Student = {
-				getMyAgendaEvents: GetMyAgendaEvent[]
-				__typename: string
-			}
-
-			export type GetMyAgendaEvent = {
-				agendaItemContext: AgendaItemContext
-				start: Date
-				end: Date
-				label: string
-				description: string
-				agendaEventType: string
-				additionalInfo: AdditionalInfo[]
-				__typename: string
-			}
-
-			export type AdditionalInfo = {
-				key: string
-				value: string
-				__typename: string
-			}
-
-			export type AgendaItemContext = {
-				entityId: string
-				entityType: string
-				__typename: string
-			}
-		}
-
-		export type Data = Data.Data
-	}
-
 	export namespace WidgetAchievementsGetLastBadges {
 		export const request = createGqlQueryRequest(
 			"query widgetAchievementsGetLastBadges($limit: Int) {\n  student {\n    getLastBadges(limit: $limit) {\n      id\n      points\n      badge {\n        name\n        avatarUrl\n        __typename\n      }\n      award {\n        awardBounties {\n          awardLevelId\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
@@ -900,40 +680,6 @@ export namespace Api {
 
 			export type Student = {
 				getWorkstationByLogin: null
-				__typename: string
-			}
-		}
-
-		export type Data = Data.Data
-	}
-
-	export namespace GetStudentStageGroupS21 {
-		export const request = createGqlQueryRequest(
-			"query getStudentStageGroupS21($studentId: UUID!) {\n  student {\n    getStageGroupS21PublicProfile(studentId: $studentId) {\n      waveId\n      waveName\n      eduForm\n      __typename\n    }\n    __typename\n  }\n}\n",
-		)
-
-		export namespace Variables {
-			export type Variables = {
-				studentId: string
-			}
-		}
-
-		export type Variables = Variables.Variables
-
-		export namespace Data {
-			export type Data = {
-				student: Student
-			}
-
-			export type Student = {
-				getStageGroupS21PublicProfile: GetStageGroupS21PublicProfile
-				__typename: string
-			}
-
-			export type GetStageGroupS21PublicProfile = {
-				waveId: number
-				waveName: string
-				eduForm: string
 				__typename: string
 			}
 		}
@@ -1042,176 +788,6 @@ export namespace Api {
 				middleName: string
 				lastName: string
 				currentSchoolStudentId: string
-				__typename: string
-			}
-		}
-
-		export type Data = Data.Data
-	}
-
-	export namespace CalendarGetEvents {
-		export const request = createGqlQueryRequest(
-			"query calendarGetEvents($from: DateTime!, $to: DateTime!) {\n  student {\n    getMyCalendarEvents(from: $from, to: $to) {\n      ...CalendarEvent\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CalendarEvent on CalendarEvent {\n  id\n  start\n  end\n  description\n  eventType\n  eventCode\n  eventSlots {\n    id\n    type\n    start\n    end\n    __typename\n  }\n  bookings {\n    ...CalendarReviewBooking\n    __typename\n  }\n  exam {\n    ...CalendarEventExam\n    __typename\n  }\n  studentCodeReview {\n    studentGoalId\n    __typename\n  }\n  activity {\n    ...CalendarEventActivity\n    studentFeedback {\n      id\n      rating\n      comment\n      __typename\n    }\n    status\n    activityType\n    isMandatory\n    isWaitListActive\n    isVisible\n    comments {\n      type\n      createTs\n      comment\n      __typename\n    }\n    organizers {\n      id\n      login\n      __typename\n    }\n    __typename\n  }\n  goals {\n    goalId\n    goalName\n    __typename\n  }\n  penalty {\n    ...Penalty\n    __typename\n  }\n  __typename\n}\n\nfragment CalendarReviewBooking on CalendarBooking {\n  id\n  answerId\n  eventSlotId\n  task {\n    id\n    goalId\n    goalName\n    studentTaskAdditionalAttributes {\n      cookiesCount\n      __typename\n    }\n    assignmentType\n    __typename\n  }\n  eventSlot {\n    id\n    start\n    end\n    event {\n      eventUserRole\n      __typename\n    }\n    __typename\n  }\n  verifierUser {\n    ...CalendarReviewUser\n    __typename\n  }\n  verifiableStudent {\n    id\n    user {\n      ...CalendarReviewUser\n      __typename\n    }\n    __typename\n  }\n  bookingStatus\n  team {\n    ...ProjectTeamMembers\n    __typename\n  }\n  isOnline\n  vcLinkUrl\n  __typename\n}\n\nfragment CalendarReviewUser on User {\n  id\n  login\n  __typename\n}\n\nfragment ProjectTeamMembers on ProjectTeamMembers {\n  id\n  teamLead {\n    ...ProjectTeamMember\n    __typename\n  }\n  members {\n    ...ProjectTeamMember\n    __typename\n  }\n  invitedUsers {\n    ...ProjectTeamMember\n    __typename\n  }\n  teamName\n  teamStatus\n  minTeamMemberCount\n  maxTeamMemberCount\n  __typename\n}\n\nfragment ProjectTeamMember on User {\n  id\n  avatarUrl\n  login\n  userExperience {\n    level {\n      id\n      range {\n        levelCode\n        __typename\n      }\n      __typename\n    }\n    cookiesCount\n    codeReviewPoints\n    __typename\n  }\n  __typename\n}\n\nfragment CalendarEventExam on Exam {\n  examId\n  eventId\n  beginDate\n  endDate\n  name\n  location\n  currentStudentsCount\n  maxStudentCount\n  updateDate\n  goalId\n  goalName\n  isWaitListActive\n  isInWaitList\n  stopRegisterDate\n  __typename\n}\n\nfragment CalendarEventActivity on ActivityEvent {\n  activityEventId\n  eventId\n  name\n  beginDate\n  endDate\n  isRegistered\n  description\n  currentStudentsCount\n  maxStudentCount\n  location\n  updateDate\n  isWaitListActive\n  isInWaitList\n  stopRegisterDate\n  __typename\n}\n\nfragment Penalty on Penalty {\n  comment\n  id\n  duration\n  status\n  startTime\n  createTime\n  penaltySlot {\n    currentStudentsCount\n    description\n    duration\n    startTime\n    id\n    endTime\n    __typename\n  }\n  reasonId\n  __typename\n}\n",
-		)
-
-		export namespace Variables {
-			export type Variables = {
-				from: Date
-				to: Date
-			}
-		}
-
-		export type Variables = Variables.Variables
-
-		export namespace Data {
-			export type Data = {
-				student: Student
-			}
-
-			export type Student = {
-				getMyCalendarEvents: GetMyCalendarEvent[]
-				__typename: string
-			}
-
-			export type GetMyCalendarEvent = {
-				id: string
-				start: Date
-				end: Date
-				description: string
-				eventType: string
-				eventCode: string
-				eventSlots: EventSlot[]
-				bookings: Booking[]
-				exam: null
-				studentCodeReview: null
-				activity: Activity | null
-				goals: unknown[]
-				penalty: null
-				__typename: string
-			}
-
-			export type Activity = {
-				activityEventId: string
-				eventId: string
-				name: string
-				beginDate: Date
-				endDate: Date
-				isRegistered: boolean
-				description: string
-				currentStudentsCount: number
-				maxStudentCount: number
-				location: string
-				updateDate: Date
-				isWaitListActive: boolean
-				isInWaitList: boolean
-				stopRegisterDate: Date
-				__typename: string
-				studentFeedback: StudentFeedback
-				status: string
-				activityType: string
-				isMandatory: boolean
-				isVisible: boolean
-				comments: unknown[]
-				organizers: VerifierUser[]
-			}
-
-			export type VerifierUser = {
-				id: string
-				login: string
-				__typename: string
-			}
-
-			export type StudentFeedback = {
-				id: string
-				rating: number
-				comment: string
-				__typename: string
-			}
-
-			export type Booking = {
-				id: string
-				answerId: null | string
-				eventSlotId: string
-				task: Task | null
-				eventSlot: EventSlot
-				verifierUser: VerifierUser
-				verifiableStudent: VerifiableStudent | null
-				bookingStatus: string
-				team: Team | null
-				isOnline: boolean
-				vcLinkUrl: null
-				__typename: string
-			}
-
-			export type EventSlot = {
-				id: string
-				start: Date
-				end: Date
-				event?: Event
-				__typename: string
-				type?: string
-			}
-
-			export type Event = {
-				eventUserRole: string
-				__typename: string
-			}
-
-			export type Task = {
-				id: string
-				goalId: string
-				goalName: string
-				studentTaskAdditionalAttributes: StudentTaskAdditionalAttributes
-				assignmentType: string
-				__typename: string
-			}
-
-			export type StudentTaskAdditionalAttributes = {
-				cookiesCount: number
-				__typename: string
-			}
-
-			export type Team = {
-				id: string
-				teamLead: TeamLead
-				members: TeamLead[]
-				invitedUsers: unknown[]
-				teamName: string
-				teamStatus: string
-				minTeamMemberCount: number
-				maxTeamMemberCount: number
-				__typename: string
-			}
-
-			export type TeamLead = {
-				id: string
-				avatarUrl: string
-				login: string
-				userExperience: UserExperience
-				__typename: string
-			}
-
-			export type UserExperience = {
-				level: Level
-				cookiesCount: number
-				codeReviewPoints: number
-				__typename: string
-			}
-
-			export type Level = {
-				id: number
-				range: Range
-				__typename: string
-			}
-
-			export type Range = {
-				levelCode: number
-				__typename: string
-			}
-
-			export type VerifiableStudent = {
-				id: string
-				user: VerifierUser
 				__typename: string
 			}
 		}
@@ -1414,37 +990,6 @@ export namespace Api {
 
 			export type VerifierUserUserExperience = {
 				level: Level
-				__typename: string
-			}
-		}
-
-		export type Data = Data.Data
-	}
-
-	export namespace GetPenaltyReasons {
-		export const request = createGqlQueryRequest(
-			"query getPenaltyReasons {\n  school21 {\n    getPenaltyReasons {\n      id\n      name\n      __typename\n    }\n    __typename\n  }\n}\n",
-		)
-
-		export namespace Variables {
-			export type Variables = {}
-		}
-
-		export type Variables = Variables.Variables
-
-		export namespace Data {
-			export type Data = {
-				school21: School21
-			}
-
-			export type School21 = {
-				getPenaltyReasons: GetPenaltyReason[]
-				__typename: string
-			}
-
-			export type GetPenaltyReason = {
-				id: string
-				name: string
 				__typename: string
 			}
 		}
@@ -1667,8 +1212,8 @@ export namespace Api {
 			}
 
 			export type VerifiableUsers = {
-				teamWithMembers: TeamWithMembers
-				user: null
+				teamWithMembers: TeamWithMembers | null
+				user: User | null
 				__typename: string
 			}
 
@@ -4933,6 +4478,461 @@ export namespace Api {
 
 		export type Data = Data.Data
 	}
+
+	export namespace UserGetTheme {
+		export const request = createGqlQueryRequest(
+			"query userGetTheme($userId: UUID!) {\n  user {\n    getUserViewSettings(userId: $userId) {\n      isDarkThemeEnabled\n      __typename\n    }\n    __typename\n  }\n}\n",
+		)
+
+		export namespace Variables {
+			export type Variables = {
+				userId: string
+			}
+		}
+
+		export type Variables = Variables.Variables
+
+		export namespace Data {
+			export type Data = {
+				user: User
+			}
+
+			export type User = {
+				getUserViewSettings: GetUserViewSettings
+				__typename: string
+			}
+
+			export type GetUserViewSettings = {
+				isDarkThemeEnabled: boolean
+				__typename: string
+			}
+		}
+
+		export type Data = Data.Data
+	}
+
+	export namespace GetAllInCompletedStudentFeedbackPopup {
+		export const request = createGqlQueryRequest(
+			"query getAllInCompletedStudentFeedbackPopup {\n  sc21StudentTaskCheck {\n    getAllInCompletedStudentFeedbackPopup {\n      studentFeedbackId\n      goalName\n      resultAttemptDate\n      __typename\n    }\n    __typename\n  }\n}\n",
+		)
+
+		export namespace Variables {
+			export type Variables = {}
+		}
+
+		export type Variables = Variables.Variables
+
+		export namespace Data {
+			export type Data = {
+				sc21StudentTaskCheck: Sc21StudentTaskCheck
+			}
+
+			export type Sc21StudentTaskCheck = {
+				getAllInCompletedStudentFeedbackPopup: unknown[]
+				__typename: string
+			}
+		}
+
+		export type Data = Data.Data
+	}
+
+	export namespace GetIsHonorRatingNeeded {
+		export const request = createGqlQueryRequest(
+			"query getIsHonorRatingNeeded {\n  honorRating {\n    isHonorRatingNeeded\n    __typename\n  }\n}\n",
+		)
+
+		export namespace Variables {
+			export type Variables = {}
+		}
+
+		export type Variables = Variables.Variables
+
+		export namespace Data {
+			export type Data = {
+				honorRating: HonorRating
+			}
+
+			export type HonorRating = {
+				isHonorRatingNeeded: boolean
+				__typename: string
+			}
+		}
+
+		export type Data = Data.Data
+	}
+
+	export namespace GetSearchHistory {
+		export const request = createGqlQueryRequest(
+			"query getSearchHistory {\n  globalSearch {\n    getSearchHistoryTooltips {\n      tooltipText\n      tooltipCategory\n      __typename\n    }\n    __typename\n  }\n}\n",
+		)
+
+		export namespace Variables {
+			export type Variables = {}
+		}
+
+		export type Variables = Variables.Variables
+
+		export namespace Data {
+			export type Data = {
+				globalSearch: GlobalSearch
+			}
+
+			export type GlobalSearch = {
+				getSearchHistoryTooltips: GetSearchHistoryTooltip[]
+				__typename: string
+			}
+
+			export type GetSearchHistoryTooltip = {
+				tooltipText: string
+				tooltipCategory: string
+				__typename: string
+			}
+		}
+
+		export type Data = Data.Data
+	}
+
+	export namespace GetUpcomingEvents {
+		export const request = createGqlQueryRequest(
+			"query getUpcomingEvents($eventCodes: [String!]!, $registrationAccessStatusFilter: RegistartionStatusEnum, $page: PagingInput) {\n  calendarEventS21 {\n    getUpcomingEventsForRegistration(\n      eventCodes: $eventCodes\n      registrationAccessStatusFilter: $registrationAccessStatusFilter\n      page: $page\n    ) {\n      ...UpcomingEvent\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment UpcomingEvent on CalendarEvent {\n  id\n  start\n  end\n  bookings {\n    id\n    task {\n      id\n      goalName\n      __typename\n    }\n    __typename\n  }\n  eventSlots {\n    id\n    eventId\n    type\n    start\n    end\n    __typename\n  }\n  maxStudentCount\n  location\n  ipRange\n  eventType\n  eventCode\n  description\n  externalId\n  currentStudentsCount\n  exam {\n    examId\n    eventId\n    beginDate\n    endDate\n    location\n    ip\n    maxStudentCount\n    isVisible\n    name\n    goalId\n    isWaitListActive\n    isInWaitList\n    currentStudentsCount\n    createDate\n    updateDate\n    schoolId\n    stopRegisterDate\n    isRegistered\n    goalName\n    eventType\n    registrationAccessStatus\n    __typename\n  }\n  studentCodeReview {\n    studentGoalId\n    __typename\n  }\n  activity {\n    activityEventId\n    eventId\n    beginDate\n    endDate\n    location\n    description\n    maxStudentCount\n    isVisible\n    name\n    isWaitListActive\n    isInWaitList\n    currentStudentsCount\n    createDate\n    updateDate\n    schoolId\n    stopRegisterDate\n    isRegistered\n    activityType\n    eventType\n    isMandatory\n    status\n    organizers {\n      id\n      login\n      __typename\n    }\n    __typename\n  }\n  penalty {\n    ...Penalty\n    __typename\n  }\n  __typename\n}\n\nfragment Penalty on Penalty {\n  comment\n  id\n  duration\n  status\n  startTime\n  createTime\n  penaltySlot {\n    currentStudentsCount\n    description\n    duration\n    startTime\n    id\n    endTime\n    __typename\n  }\n  reasonId\n  __typename\n}\n",
+		)
+
+		export namespace Variables {
+			export type Variables = {
+				eventCodes: string[]
+				registrationAccessStatusFilter: string
+				page: Page
+			}
+
+			export type Page = {
+				limit: number
+				offset: number
+			}
+		}
+
+		export type Variables = Variables.Variables
+
+		export namespace Data {
+			export type Data = {
+				calendarEventS21: CalendarEventS21
+			}
+
+			export type CalendarEventS21 = {
+				getUpcomingEventsForRegistration: GetUpcomingEventsForRegistration[]
+				__typename: string
+			}
+
+			export type GetUpcomingEventsForRegistration = {
+				id: string
+				start: Date
+				end: Date
+				bookings: unknown[]
+				eventSlots: unknown[]
+				maxStudentCount: number
+				location: string
+				ipRange: string
+				eventType: string
+				eventCode: string
+				description: string
+				externalId: number
+				currentStudentsCount: number
+				exam: null
+				studentCodeReview: null
+				activity: Activity
+				penalty: null
+				__typename: string
+			}
+
+			export type Activity = {
+				activityEventId: string
+				eventId: string
+				beginDate: Date
+				endDate: Date
+				location: string
+				description: string
+				maxStudentCount: number
+				isVisible: boolean
+				name: string
+				isWaitListActive: boolean
+				isInWaitList: boolean
+				currentStudentsCount: number
+				createDate: Date
+				updateDate: Date
+				schoolId: string
+				stopRegisterDate: Date
+				isRegistered: boolean
+				activityType: string
+				eventType: string
+				isMandatory: boolean
+				status: string
+				organizers: Organizer[]
+				__typename: string
+			}
+
+			export type Organizer = {
+				id: string
+				login: string
+				__typename: string
+			}
+		}
+
+		export type Data = Data.Data
+	}
+
+	export namespace GetAgendaEvents {
+		export const request = createGqlQueryRequest(
+			"query getAgendaEvents($from: DateTime!, $to: DateTime!, $limit: Int!) {\n  calendarEventS21 {\n    getMyAgendaEvents(from: $from, to: $to, limit: $limit) {\n      agendaItemContext {\n        entityId\n        entityType\n        __typename\n      }\n      start\n      end\n      label\n      description\n      agendaEventType\n      additionalInfo {\n        key\n        value\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n",
+		)
+
+		export namespace Variables {
+			export type Variables = {
+				from: Date
+				to: Date
+				limit: number
+			}
+		}
+
+		export type Variables = Variables.Variables
+
+		export namespace Data {
+			export type Data = {
+				calendarEventS21: CalendarEventS21
+			}
+
+			export type CalendarEventS21 = {
+				getMyAgendaEvents: GetMyAgendaEvent[]
+				__typename: string
+			}
+
+			export type GetMyAgendaEvent = {
+				agendaItemContext: AgendaItemContext
+				start: Date
+				end: Date
+				label: string
+				description: string
+				agendaEventType: string
+				additionalInfo: AdditionalInfo[]
+				__typename: string
+			}
+
+			export type AdditionalInfo = {
+				key: string
+				value: string
+				__typename: string
+			}
+
+			export type AgendaItemContext = {
+				entityId: string
+				entityType: string
+				__typename: string
+			}
+		}
+
+		export type Data = Data.Data
+	}
+
+	export namespace GetStudentStageGroupS21 {
+		export const request = createGqlQueryRequest(
+			"query getStudentStageGroupS21($studentId: UUID!) {\n  school21 {\n    getStageGroupS21PublicProfile(studentId: $studentId) {\n      waveId\n      waveName\n      eduForm\n      __typename\n    }\n    __typename\n  }\n}\n",
+		)
+
+		export namespace Variables {
+			export type Variables = {
+				studentId: string
+			}
+		}
+
+		export type Variables = Variables.Variables
+
+		export namespace Data {
+			export type Data = {
+				school21: School21
+			}
+
+			export type School21 = {
+				getStageGroupS21PublicProfile: GetStageGroupS21PublicProfile
+				__typename: string
+			}
+
+			export type GetStageGroupS21PublicProfile = {
+				waveId: number
+				waveName: string
+				eduForm: string
+				__typename: string
+			}
+		}
+
+		export type Data = Data.Data
+	}
+
+	export namespace CalendarGetEvents {
+		export const request = createGqlQueryRequest(
+			"query calendarGetEvents($from: DateTime!, $to: DateTime!) {\n  calendarEventS21 {\n    getMyCalendarEvents(from: $from, to: $to) {\n      ...CalendarEvent\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment CalendarEvent on CalendarEvent {\n  id\n  start\n  end\n  description\n  eventType\n  eventCode\n  eventSlots {\n    id\n    type\n    start\n    end\n    __typename\n  }\n  bookings {\n    ...CalendarReviewBooking\n    __typename\n  }\n  exam {\n    ...CalendarEventExam\n    __typename\n  }\n  studentCodeReview {\n    studentGoalId\n    __typename\n  }\n  activity {\n    ...CalendarEventActivity\n    studentFeedback {\n      id\n      rating\n      comment\n      __typename\n    }\n    status\n    activityType\n    isMandatory\n    isWaitListActive\n    isVisible\n    comments {\n      type\n      createTs\n      comment\n      __typename\n    }\n    organizers {\n      id\n      login\n      __typename\n    }\n    __typename\n  }\n  goals {\n    goalId\n    goalName\n    __typename\n  }\n  penalty {\n    ...Penalty\n    __typename\n  }\n  __typename\n}\n\nfragment CalendarReviewBooking on CalendarBooking {\n  id\n  answerId\n  eventSlotId\n  task {\n    id\n    goalId\n    goalName\n    studentTaskAdditionalAttributes {\n      cookiesCount\n      __typename\n    }\n    assignmentType\n    __typename\n  }\n  eventSlot {\n    id\n    start\n    end\n    event {\n      eventUserRole\n      __typename\n    }\n    __typename\n  }\n  verifierUser {\n    ...CalendarReviewUser\n    __typename\n  }\n  verifiableStudent {\n    id\n    user {\n      ...CalendarReviewUser\n      __typename\n    }\n    __typename\n  }\n  bookingStatus\n  team {\n    ...ProjectTeamMembers\n    __typename\n  }\n  isOnline\n  vcLinkUrl\n  __typename\n}\n\nfragment CalendarReviewUser on User {\n  id\n  login\n  __typename\n}\n\nfragment ProjectTeamMembers on ProjectTeamMembers {\n  id\n  teamLead {\n    ...ProjectTeamMember\n    __typename\n  }\n  members {\n    ...ProjectTeamMember\n    __typename\n  }\n  invitedUsers {\n    ...ProjectTeamMember\n    __typename\n  }\n  teamName\n  teamStatus\n  minTeamMemberCount\n  maxTeamMemberCount\n  __typename\n}\n\nfragment ProjectTeamMember on User {\n  id\n  avatarUrl\n  login\n  userExperience {\n    level {\n      id\n      range {\n        levelCode\n        __typename\n      }\n      __typename\n    }\n    cookiesCount\n    codeReviewPoints\n    __typename\n  }\n  __typename\n}\n\nfragment CalendarEventExam on Exam {\n  examId\n  eventId\n  beginDate\n  endDate\n  name\n  location\n  currentStudentsCount\n  maxStudentCount\n  updateDate\n  goalId\n  goalName\n  isWaitListActive\n  isInWaitList\n  stopRegisterDate\n  __typename\n}\n\nfragment CalendarEventActivity on ActivityEvent {\n  activityEventId\n  eventId\n  name\n  beginDate\n  endDate\n  isRegistered\n  description\n  currentStudentsCount\n  maxStudentCount\n  location\n  updateDate\n  isWaitListActive\n  isInWaitList\n  stopRegisterDate\n  __typename\n}\n\nfragment Penalty on Penalty {\n  comment\n  id\n  duration\n  status\n  startTime\n  createTime\n  penaltySlot {\n    currentStudentsCount\n    description\n    duration\n    startTime\n    id\n    endTime\n    __typename\n  }\n  reasonId\n  __typename\n}\n",
+		)
+
+		export namespace Variables {
+			export type Variables = {
+				from: Date
+				to: Date
+			}
+		}
+
+		export type Variables = Variables.Variables
+
+		export namespace Data {
+			export type Data = {
+				calendarEventS21: CalendarEventS21
+			}
+
+			export type CalendarEventS21 = {
+				getMyCalendarEvents: GetMyCalendarEvent[]
+				__typename: string
+			}
+
+			export type GetMyCalendarEvent = {
+				id: string
+				start: Date
+				end: Date
+				description: string
+				eventType: string
+				eventCode: string
+				eventSlots: EventSlot[]
+				bookings: Booking[]
+				exam: null
+				studentCodeReview: null
+				activity: null
+				goals: unknown[]
+				penalty: null
+				__typename: string
+			}
+
+			export type Booking = {
+				id: string
+				answerId: string
+				eventSlotId: string
+				task: Task
+				eventSlot: EventSlot
+				verifierUser: User
+				verifiableStudent: VerifiableStudent
+				bookingStatus: string
+				team: Team | null
+				isOnline: boolean
+				vcLinkUrl: null
+				__typename: string
+			}
+
+			export type EventSlot = {
+				id: string
+				start: Date
+				end: Date
+				event?: Event
+				__typename: string
+				type?: string
+			}
+
+			export type Event = {
+				eventUserRole: string
+				__typename: string
+			}
+
+			export type Task = {
+				id: string
+				goalId: string
+				goalName: string
+				studentTaskAdditionalAttributes: StudentTaskAdditionalAttributes
+				assignmentType: string
+				__typename: string
+			}
+
+			export type StudentTaskAdditionalAttributes = {
+				cookiesCount: number
+				__typename: string
+			}
+
+			export type Team = {
+				id: string
+				teamLead: TeamLead
+				members: TeamLead[]
+				invitedUsers: unknown[]
+				teamName: string
+				teamStatus: string
+				minTeamMemberCount: number
+				maxTeamMemberCount: number
+				__typename: string
+			}
+
+			export type TeamLead = {
+				id: string
+				avatarUrl: string
+				login: string
+				userExperience: UserExperience
+				__typename: string
+			}
+
+			export type UserExperience = {
+				level: Level
+				cookiesCount: number
+				codeReviewPoints: number
+				__typename: string
+			}
+
+			export type Level = {
+				id: number
+				range: Range
+				__typename: string
+			}
+
+			export type Range = {
+				levelCode: number
+				__typename: string
+			}
+
+			export type VerifiableStudent = {
+				id: string
+				user: User
+				__typename: string
+			}
+
+			export type User = {
+				id: string
+				login: string
+				__typename: string
+			}
+		}
+
+		export type Data = Data.Data
+	}
+
+	export namespace GetPenaltyReasons {
+		export const request = createGqlQueryRequest(
+			"query getPenaltyReasons {\n  penalty {\n    getPenaltyReasons {\n      id\n      name\n      __typename\n    }\n    __typename\n  }\n}\n",
+		)
+
+		export namespace Variables {
+			export type Variables = {}
+		}
+
+		export type Variables = Variables.Variables
+
+		export namespace Data {
+			export type Data = {
+				penalty: Penalty
+			}
+
+			export type Penalty = {
+				getPenaltyReasons: GetPenaltyReason[]
+				__typename: string
+			}
+
+			export type GetPenaltyReason = {
+				id: string
+				name: string
+				__typename: string
+			}
+		}
+
+		export type Data = Data.Data
+	}
 }
 
 export class ApiContext {
@@ -5016,29 +5016,11 @@ export class ApiContext {
 		})
 	}
 
-	async getIsHonorRatingNeeded(
-		...[variables]: ElideVariables<Api.GetIsHonorRatingNeeded.Variables>
-	) {
-		return this.client.request<Api.GetIsHonorRatingNeeded.Data>({
-			...Api.GetIsHonorRatingNeeded.request,
-			variables: useDefaultVariables(variables),
-		})
-	}
-
 	async getSaleProgressPercentages(
 		...[variables]: ElideVariables<Api.GetSaleProgressPercentages.Variables>
 	) {
 		return this.client.request<Api.GetSaleProgressPercentages.Data>({
 			...Api.GetSaleProgressPercentages.request,
-			variables: useDefaultVariables(variables),
-		})
-	}
-
-	async getSearchHistory(
-		...[variables]: ElideVariables<Api.GetSearchHistory.Variables>
-	) {
-		return this.client.request<Api.GetSearchHistory.Data>({
-			...Api.GetSearchHistory.request,
 			variables: useDefaultVariables(variables),
 		})
 	}
@@ -5079,24 +5061,6 @@ export class ApiContext {
 		})
 	}
 
-	async getUpcomingEvents(
-		...[variables]: ElideVariables<Api.GetUpcomingEvents.Variables>
-	) {
-		return this.client.request<Api.GetUpcomingEvents.Data>({
-			...Api.GetUpcomingEvents.request,
-			variables: useDefaultVariables(variables),
-		})
-	}
-
-	async getAgendaEvents(
-		...[variables]: ElideVariables<Api.GetAgendaEvents.Variables>
-	) {
-		return this.client.request<Api.GetAgendaEvents.Data>({
-			...Api.GetAgendaEvents.request,
-			variables: useDefaultVariables(variables),
-		})
-	}
-
 	async widgetAchievementsGetLastBadges(
 		...[
 			variables,
@@ -5113,15 +5077,6 @@ export class ApiContext {
 	) {
 		return this.client.request<Api.GetDashboardWorkstation.Data>({
 			...Api.GetDashboardWorkstation.request,
-			variables: useDefaultVariables(variables),
-		})
-	}
-
-	async getStudentStageGroupS21(
-		...[variables]: ElideVariables<Api.GetStudentStageGroupS21.Variables>
-	) {
-		return this.client.request<Api.GetStudentStageGroupS21.Data>({
-			...Api.GetStudentStageGroupS21.request,
 			variables: useDefaultVariables(variables),
 		})
 	}
@@ -5144,15 +5099,6 @@ export class ApiContext {
 		})
 	}
 
-	async calendarGetEvents(
-		...[variables]: ElideVariables<Api.CalendarGetEvents.Variables>
-	) {
-		return this.client.request<Api.CalendarGetEvents.Data>({
-			...Api.CalendarGetEvents.request,
-			variables: useDefaultVariables(variables),
-		})
-	}
-
 	async calendarGetMyBookings(
 		...[variables]: ElideVariables<Api.CalendarGetMyBookings.Variables>
 	) {
@@ -5167,15 +5113,6 @@ export class ApiContext {
 	) {
 		return this.client.request<Api.CalendarGetMyReviews.Data>({
 			...Api.CalendarGetMyReviews.request,
-			variables: useDefaultVariables(variables),
-		})
-	}
-
-	async getPenaltyReasons(
-		...[variables]: ElideVariables<Api.GetPenaltyReasons.Variables>
-	) {
-		return this.client.request<Api.GetPenaltyReasons.Data>({
-			...Api.GetPenaltyReasons.request,
 			variables: useDefaultVariables(variables),
 		})
 	}
@@ -5802,6 +5739,91 @@ export class ApiContext {
 	) {
 		return this.client.request<Api.CalendarGetExams.Data>({
 			...Api.CalendarGetExams.request,
+			variables: useDefaultVariables(variables),
+		})
+	}
+
+	async userGetTheme(
+		...[variables]: ElideVariables<Api.UserGetTheme.Variables>
+	) {
+		return this.client.request<Api.UserGetTheme.Data>({
+			...Api.UserGetTheme.request,
+			variables: useDefaultVariables(variables),
+		})
+	}
+
+	async getAllInCompletedStudentFeedbackPopup(
+		...[
+			variables,
+		]: ElideVariables<Api.GetAllInCompletedStudentFeedbackPopup.Variables>
+	) {
+		return this.client.request<Api.GetAllInCompletedStudentFeedbackPopup.Data>(
+			{
+				...Api.GetAllInCompletedStudentFeedbackPopup.request,
+				variables: useDefaultVariables(variables),
+			},
+		)
+	}
+
+	async getIsHonorRatingNeeded(
+		...[variables]: ElideVariables<Api.GetIsHonorRatingNeeded.Variables>
+	) {
+		return this.client.request<Api.GetIsHonorRatingNeeded.Data>({
+			...Api.GetIsHonorRatingNeeded.request,
+			variables: useDefaultVariables(variables),
+		})
+	}
+
+	async getSearchHistory(
+		...[variables]: ElideVariables<Api.GetSearchHistory.Variables>
+	) {
+		return this.client.request<Api.GetSearchHistory.Data>({
+			...Api.GetSearchHistory.request,
+			variables: useDefaultVariables(variables),
+		})
+	}
+
+	async getUpcomingEvents(
+		...[variables]: ElideVariables<Api.GetUpcomingEvents.Variables>
+	) {
+		return this.client.request<Api.GetUpcomingEvents.Data>({
+			...Api.GetUpcomingEvents.request,
+			variables: useDefaultVariables(variables),
+		})
+	}
+
+	async getAgendaEvents(
+		...[variables]: ElideVariables<Api.GetAgendaEvents.Variables>
+	) {
+		return this.client.request<Api.GetAgendaEvents.Data>({
+			...Api.GetAgendaEvents.request,
+			variables: useDefaultVariables(variables),
+		})
+	}
+
+	async getStudentStageGroupS21(
+		...[variables]: ElideVariables<Api.GetStudentStageGroupS21.Variables>
+	) {
+		return this.client.request<Api.GetStudentStageGroupS21.Data>({
+			...Api.GetStudentStageGroupS21.request,
+			variables: useDefaultVariables(variables),
+		})
+	}
+
+	async calendarGetEvents(
+		...[variables]: ElideVariables<Api.CalendarGetEvents.Variables>
+	) {
+		return this.client.request<Api.CalendarGetEvents.Data>({
+			...Api.CalendarGetEvents.request,
+			variables: useDefaultVariables(variables),
+		})
+	}
+
+	async getPenaltyReasons(
+		...[variables]: ElideVariables<Api.GetPenaltyReasons.Variables>
+	) {
+		return this.client.request<Api.GetPenaltyReasons.Data>({
+			...Api.GetPenaltyReasons.request,
 			variables: useDefaultVariables(variables),
 		})
 	}
