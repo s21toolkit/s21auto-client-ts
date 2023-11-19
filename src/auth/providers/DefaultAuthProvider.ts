@@ -4,8 +4,22 @@ import { AuthCredentials, AuthProvider } from "@/auth/providers/AuthProvider"
 export class DefaultAuthProvider implements AuthProvider {
 	#token: Token
 
+	#schoolId?: string
+
 	constructor(username: string, password: string) {
 		this.#token = new Token(username, password)
+	}
+
+	async #fetchSchoolId() {
+		if (!this.#schoolId) {
+			const userData = await fetchUserData(this.#token)
+
+			this.#schoolId = userData.user.getCurrentUserSchoolRoles[0].schoolId
+
+			return this.#schoolId
+		}
+
+		return this.#schoolId
 	}
 
 	async getAuthCredentials(): Promise<AuthCredentials> {
@@ -13,11 +27,11 @@ export class DefaultAuthProvider implements AuthProvider {
 
 		this.#token.assertValid()
 
-		const userData = await fetchUserData(this.#token)
+		const schoolId = await this.#fetchSchoolId()
 
 		return {
 			accessToken: this.#token.accessToken,
-			schoolId: userData.user.getCurrentUserSchoolRoles[0].schoolId,
+			schoolId,
 		}
 	}
 }
