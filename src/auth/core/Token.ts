@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto"
 import { createKCCookieUrl, KC_REDIRECT_URI, KC_TOKEN_URL } from "./keycloak"
 
 const LOGIN_ACTION_PATTERN = /(?<LoginActionURL>https:\/\/.+?)"/
@@ -26,8 +27,8 @@ function getOAuthCode(location: string) {
 }
 
 async function fetchAuthData(username: string, password: string) {
-	const state = crypto.randomUUID()
-	const nonce = crypto.randomUUID()
+	const state = randomUUID()
+	const nonce = randomUUID()
 
 	const cookieUrl = createKCCookieUrl(state, nonce)
 
