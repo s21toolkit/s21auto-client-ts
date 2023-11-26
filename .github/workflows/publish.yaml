@@ -25,4 +25,4 @@ jobs:
       - name: Build & Publish
         run: |
           pnpm install --frozen-lockfile
-          pnpm publish
+          pnpm publish --no-git-checks
