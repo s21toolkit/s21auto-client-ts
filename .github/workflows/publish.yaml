@@ -1,3 +1,5 @@
+name: publish
+
 on:
   push:
     tags: "v*.*.*"
@@ -12,16 +14,13 @@ jobs:
       NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
-          cache: npm
-          cache-dependency-path: bun.lockb
+          node-version: ">=21.0.0"
+          cache: pnpm
           registry-url: https://npm.pkg.github.com/
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
       - name: Build & Publish
         run: |
-          bun install --frozen-lockfile
-          npm publish
+          pnpm install --frozen-lockfile
+          pnpm publish
