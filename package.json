@@ -13,9 +13,10 @@
   "version": "0.5.0",
   "scripts": {
     "build": "tsup",
-    "prepublishOnly": "pnpm run build",
+    "prepublishOnly": "pnpm build",
     "release": "pnpm version -m 'chore(release): %s' --",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "format": "pnpm eslint src --fix"
   },
   "files": [
     "build/*",
