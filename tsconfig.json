@@ -16,7 +16,6 @@
 		"paths": {
 			"@/*": ["src/*"]
 		},
-		"types": ["bun-types"],
 
 		/* Emit */
 		"noEmit": true,
