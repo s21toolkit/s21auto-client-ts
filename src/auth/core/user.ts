@@ -2,7 +2,7 @@ import { source } from "common-tags"
 import { S21_GQL_API_URL } from "@/constants"
 import { GQLError, HttpError } from "@/errors"
 import { createGqlQueryRequest, RawGQLResponse } from "@/gql"
-import { Token } from "./Token"
+import { TokenResponse } from "./flow"
 
 export type UserRoleData = {
 	user: User
@@ -97,11 +97,15 @@ const userRoleLoaderGetRolesRequest = JSON.stringify(
 	`),
 )
 
-export async function fetchUserData(token: Token) {
+export async function fetchUserData(token: TokenResponse): Promise<UserRoleData>
+export async function fetchUserData(accessToken: string): Promise<UserRoleData>
+export async function fetchUserData(token: TokenResponse | string) {
+	const accessToken = typeof token === "string" ? token : token.accessToken
+
 	const userDataResponse = await fetch(S21_GQL_API_URL, {
 		method: "POST",
 		headers: {
-			...token.headers,
+			Authorization: `Bearer ${accessToken}`,
 			"Content-Type": "application/json",
 		},
 		body: userRoleLoaderGetRolesRequest,

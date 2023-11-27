@@ -120,7 +120,7 @@ type TokenResponseData =
 			scope: string
 	  }
 
-type TokenData = {
+export type TokenResponse = {
 	accessToken: string
 	oauthCode: string
 	cookies: string
@@ -128,96 +128,43 @@ type TokenData = {
 	expiryTime: number
 }
 
-export class Token {
-	#username: string
-	#password: string
+export async function fetchAccessToken(
+	username: string,
+	password: string,
+): Promise<TokenResponse> {
+	const authData = await fetchAuthData(username, password)
 
-	#data?: TokenData
+	const tokenRequestData = new URLSearchParams({
+		code: authData.oauthCode,
+		grant_type: "authorization_code",
+		client_id: "school21",
+		redirect_uri: KC_REDIRECT_URI,
+	})
 
-	constructor(username: string, password: string) {
-		this.#username = username
-		this.#password = password
+	const tokenIssueTime = Date.now() / 1000
+
+	const tokenResponse = await fetch(KC_TOKEN_URL, {
+		method: "POST",
+		headers: {
+			Cookie: authData.kcCookies,
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		body: tokenRequestData,
+	})
+
+	const tokenData = (await tokenResponse.json()) as TokenResponseData
+
+	if ("error" in tokenData) {
+		throw new Error(
+			`Failed to fetch access token: [${tokenData.error}] ${tokenData.error_description}`,
+		)
 	}
 
-	async tryRefresh() {
-		if (this.isValid) {
-			return
-		}
-
-		await this.refresh()
-	}
-
-	async refresh() {
-		const authData = await fetchAuthData(this.#username, this.#password)
-
-		const tokenRequestData = new URLSearchParams({
-			code: authData.oauthCode,
-			grant_type: "authorization_code",
-			client_id: "school21",
-			redirect_uri: KC_REDIRECT_URI,
-		})
-
-		const tokenIssueTime = Date.now() / 1000
-
-		const tokenResponse = await fetch(KC_TOKEN_URL, {
-			method: "POST",
-			headers: {
-				Cookie: authData.kcCookies,
-				"Content-Type": "application/x-www-form-urlencoded",
-			},
-			body: tokenRequestData,
-		})
-
-		const tokenData = (await tokenResponse.json()) as TokenResponseData
-
-		if ("error" in tokenData) {
-			throw new Error(
-				`Failed to fetch access token: [${tokenData.error}] ${tokenData.error_description}`,
-			)
-		}
-
-		this.#data = {
-			accessToken: tokenData.access_token,
-			oauthCode: authData.oauthCode,
-			issueTime: tokenIssueTime,
-			expiryTime: tokenData.expires_in,
-			cookies: authData.kcCookies,
-		}
-	}
-
-	get isValid() {
-		if (!this.#data) {
-			return false
-		}
-
-		const now = Date.now() / 1000
-
-		const isExpired = now - this.#data.issueTime > this.#data.expiryTime
-
-		return !isExpired
-	}
-
-	assertValid() {
-		if (this.isValid) {
-			return
-		}
-
-		throw new Error(`Invalid token`)
-	}
-
-	get accessToken() {
-		this.assertValid()
-
-		return this.#data!.accessToken
-	}
-
-	get authorizationHeader() {
-		return `Bearer ${this.accessToken}`
-	}
-
-	get headers() {
-		return {
-			Authorization: this.authorizationHeader,
-		}
+	return {
+		accessToken: tokenData.access_token,
+		oauthCode: authData.oauthCode,
+		issueTime: tokenIssueTime,
+		expiryTime: tokenData.expires_in,
+		cookies: authData.kcCookies,
 	}
 }
