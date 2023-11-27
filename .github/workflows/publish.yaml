@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: ">=21.0.0"
           cache: pnpm
-          registry-url: https://npm.pkg.github.com/
+          registry-url: https://registry.npmjs.org
       - name: Build & Publish
         run: |
           pnpm install --frozen-lockfile
