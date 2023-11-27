@@ -4,18 +4,9 @@
 
 > [!IMPORTANT]
 > Работает на `node>=20.0.0`, скорее всего должен работать в браузере
->
-> Для установки необходимо добавить github npm registry
 
 ```sh
 npm install @s21toolkit/client
-```
-
-Пример `.npmrc` для установки:
-
-```npmrc
-@s21toolkit:registry=https://npm.pkg.github.com/
-//npm.pkg.github.com/:_authToken=${GITHUB_NPM_TOKEN}
 ```
 
 Пример использования:
