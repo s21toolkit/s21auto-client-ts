@@ -10,7 +10,7 @@
     "default": "./build/index.js",
     "types": "./build/index.d.ts"
   },
-  "version": "0.6.2-dev.0",
+  "version": "0.6.2",
   "scripts": {
     "build": "tsup",
     "prepublishOnly": "pnpm build",
