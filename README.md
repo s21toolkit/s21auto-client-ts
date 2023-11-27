@@ -12,10 +12,10 @@ npm install @s21toolkit/client
 Пример использования:
 
 ```ts
-import { Client, DefaultAuthProvider } from "@s21toolkit/client"
+import { Client, UserAuthProvider } from "@s21toolkit/client"
 
 const client = new Client(
-  new DefaultAuthProvider(
+  new UserAuthProvider(
     process.env.S21_USERNAME,
     process.env.S21_PASSWORD
   )
