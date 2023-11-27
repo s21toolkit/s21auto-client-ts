@@ -6,12 +6,21 @@ on:
 
 jobs:
   publish:
+    strategy:
+      matrix:
+        registry:
+          - name: github
+            url: https://registry.npmjs.org
+            token_secret: NPM_TOKEN
+          - name: npm
+            url: https://npm.pkg.github.com
+            token_secret: GITHUB_NPM_TOKEN
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     env:
-      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      NODE_AUTH_TOKEN: ${{ secrets[matrix.registry.token_secret] }}
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
@@ -21,7 +30,7 @@ jobs:
         with:
           node-version: ">=21.0.0"
           cache: pnpm
-          registry-url: https://registry.npmjs.org
+          registry-url: ${{ matrix.registry.url }}
       - name: Build & Publish
         run: |
           pnpm install --frozen-lockfile
