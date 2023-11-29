@@ -15,7 +15,7 @@ export class Client {
 		this.#authProvider = authProvider
 	}
 
-	get api() {
+	api() {
 		return new ApiContext(this)
 	}
 

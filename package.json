@@ -12,11 +12,15 @@
   },
   "version": "0.7.0",
   "scripts": {
-    "build": "tsup",
+    "build:bundle": "tsup",
+    "build": "pnpm lint && pnpm build:bundle",
+    "lint:eslint": "eslint src",
+    "lint:tsc": "tsc",
+    "lint": "pnpm lint:tsc && pnpm lint:eslint",
     "prepublishOnly": "pnpm build",
     "release": "pnpm version -m 'chore(release): %s' --",
     "postversion": "git push && git push --tags",
-    "format": "pnpm eslint src --fix"
+    "lint:fix": "eslint src --fix"
   },
   "files": [
     "build/*",

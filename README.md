@@ -21,7 +21,7 @@ const client = new Client(
   )
 )
 
-const user = await client.api.getCurrentUser()
+const user = await client.api().getCurrentUser()
 
 console.log(user)
 ```
