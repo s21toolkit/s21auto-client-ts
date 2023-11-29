@@ -10,7 +10,7 @@
     "default": "./build/index.js",
     "types": "./build/index.d.ts"
   },
-  "version": "0.7.0",
+  "version": "0.7.1",
   "scripts": {
     "build:bundle": "tsup",
     "build": "pnpm lint && pnpm build:bundle",
