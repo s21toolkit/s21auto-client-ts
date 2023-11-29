@@ -1,5 +1,5 @@
 import { ApiContext } from "@/api"
-import { AuthProvider, getAuthHeaders } from "@/auth/providers/AuthProvider"
+import { AuthProvider, getAuthHeaders, PRODUCT_ID_HEADER } from "@/auth"
 import { S21_GQL_API_URL } from "@/constants"
 import { GQLRequest, RawGQLResponse } from "@/gql"
 import { GQLError, HttpError } from "./errors"
@@ -26,6 +26,7 @@ export class Client {
 			method: "POST",
 			headers: {
 				...getAuthHeaders(credentials),
+				...PRODUCT_ID_HEADER,
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(gqlRequest),
