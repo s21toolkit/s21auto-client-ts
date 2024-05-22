@@ -14,7 +14,7 @@
 Пример использования:
 
 ```ts
-import { Client, UserAuthProvider } from "@s21toolkit/client"
+import { Client, UserAuthProvider } from "@s21toolkit/auto-client"
 
 const client = new Client(
   new UserAuthProvider(
