@@ -1,7 +1,10 @@
 import { ApiContext } from "@/api"
-import { AuthProvider, getAuthHeaders, PRODUCT_ID_HEADER } from "@/auth"
-import { S21_GQL_API_URL } from "@/constants"
-import { GQLRequest, RawGQLResponse } from "@/gql"
+import type { GQLRequest, RawGQLResponse } from "@/gql"
+import {
+	type AuthProvider,
+	S21_GQL_API_URL,
+	getAuthHeaders,
+} from "@s21toolkit/auth"
 import { GQLError, HttpError } from "./errors"
 
 export class Client {
@@ -20,13 +23,12 @@ export class Client {
 	}
 
 	async request<TData>(gqlRequest: GQLRequest) {
-		const credentials = await this.#authProvider.getAuthCredentials()
+		const authHeaders = await getAuthHeaders(this.#authProvider)
 
 		const response = await fetch(S21_GQL_API_URL, {
 			method: "POST",
 			headers: {
-				...getAuthHeaders(credentials),
-				...PRODUCT_ID_HEADER,
+				...authHeaders,
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(gqlRequest),

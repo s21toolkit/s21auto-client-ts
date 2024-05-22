@@ -1,6 +1,12 @@
-import { GQLErrorData } from "@/gql"
+import type { GQLErrorData } from "@/gql"
 
 export class ClientError extends Error {}
+
+export class AuthError extends ClientError {
+	constructor(override readonly cause: Error) {
+		super(`Auth Error: [${cause.name}] ${cause.message}`)
+	}
+}
 
 export class HttpError extends ClientError {
 	constructor(readonly response: Response) {

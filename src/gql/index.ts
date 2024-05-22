@@ -1,4 +1,6 @@
-export type GQLRequest<TVariables extends Record<string, unknown> = {}> = {
+export type GQLRequest<
+	TVariables extends Record<string, unknown> = Record<never, unknown>,
+> = {
 	operationName: string
 	query: string
 	variables: TVariables
@@ -27,8 +29,7 @@ export function createGqlQueryRequest<
 	const variables = maybeVariables ?? {}
 
 	// prettier-ignore
-	const operationName = query.match(OPERATION_NAME_PATTERN)
-		?.groups
+	const operationName = query.match(OPERATION_NAME_PATTERN)?.groups
 		?.OperationName
 
 	if (!operationName) {
