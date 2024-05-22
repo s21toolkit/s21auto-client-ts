@@ -7,12 +7,12 @@ import {
 import { AuthError, GQLError, HttpError } from "./errors"
 
 export namespace Client {
-	export type ApiContext = new (client: Client) => unknown
+	export type ApiContext = new (client: Client<ApiContext>) => unknown
 }
 
-export class Client {
+export class Client<TApiContext extends Client.ApiContext> {
 	constructor(
-		readonly ApiContext: Client.ApiContext,
+		readonly ApiContext: TApiContext,
 		public auth: AuthProvider,
 	) {}
 
@@ -21,7 +21,7 @@ export class Client {
 	}
 
 	get api() {
-		return new this.ApiContext(this)
+		return new this.ApiContext(this) as InstanceType<TApiContext>
 	}
 
 	async request<TData>(gqlRequest: GQLRequest) {
