@@ -7,23 +7,26 @@ import {
 } from "@s21toolkit/auth"
 import { GQLError, HttpError } from "./errors"
 
-export class Client {
-	#authProvider: AuthProvider
+export namespace Client {
+	export type ApiContext = new (client: Client) => unknown
+}
 
-	constructor(authProvider: AuthProvider) {
-		this.#authProvider = authProvider
-	}
+export class Client {
+	constructor(
+		readonly ApiContext: Client.ApiContext,
+		public auth: AuthProvider,
+	) {}
 
 	useAuth(authProvider: AuthProvider) {
-		this.#authProvider = authProvider
+		this.auth = authProvider
 	}
 
 	get api() {
-		return new ApiContext(this)
+		return new this.ApiContext(this)
 	}
 
 	async request<TData>(gqlRequest: GQLRequest) {
-		const authHeaders = await getAuthHeaders(this.#authProvider)
+		const authHeaders = await getAuthHeaders(this.auth)
 
 		const response = await fetch(S21_GQL_API_URL, {
 			method: "POST",
