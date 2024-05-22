@@ -1,11 +1,10 @@
-import { ApiContext } from "@/api"
 import type { GQLRequest, RawGQLResponse } from "@/gql"
 import {
 	type AuthProvider,
 	S21_GQL_API_URL,
 	getAuthHeaders,
 } from "@s21toolkit/auth"
-import { GQLError, HttpError } from "./errors"
+import { AuthError, GQLError, HttpError } from "./errors"
 
 export namespace Client {
 	export type ApiContext = new (client: Client) => unknown
@@ -26,7 +25,16 @@ export class Client {
 	}
 
 	async request<TData>(gqlRequest: GQLRequest) {
-		const authHeaders = await getAuthHeaders(this.auth)
+		let authHeaders
+		try {
+			authHeaders = await getAuthHeaders(this.auth)
+		} catch (error) {
+			if (error instanceof Error) {
+				throw new AuthError(error)
+			}
+
+			throw new AuthError(new Error("Unknown error", { cause: error }))
+		}
 
 		const response = await fetch(S21_GQL_API_URL, {
 			method: "POST",
